@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="跟学一个vue实战教程，记录的笔记以及项目注意事项，细节。">
+<meta name="keywords" content="vue,project">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue-travel项目笔记">
+<meta property="og:url" content="https://noobakong.gitee.io/2018/08/12/vue-travel项目笔记/index.html">
+<meta property="og:site_name" content="noobakong">
+<meta property="og:description" content="跟学一个vue实战教程，记录的笔记以及项目注意事项，细节。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://pd92xwp9t.bkt.clouddn.com/vue-travel.gif">
+<meta property="og:updated_time" content="2018-09-29T08:42:56.842Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue-travel项目笔记">
+<meta name="twitter:description" content="跟学一个vue实战教程，记录的笔记以及项目注意事项，细节。">
+<meta name="twitter:image" content="http://pd92xwp9t.bkt.clouddn.com/vue-travel.gif">
+
+
+
+
+
+
+  <link rel="canonical" href="https://noobakong.gitee.io/2018/08/12/vue-travel项目笔记/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>vue-travel项目笔记 | noobakong</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">noobakong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">我爱一个姓许的女孩~</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://noobakong.gitee.io/2018/08/12/vue-travel项目笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="noobakong">
+      <meta itemprop="description" content="代码和艺术,本应相通。">
+      <meta itemprop="image" content="/images/touxiang.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="noobakong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue-travel项目笔记<a href="https://github.com/theme-next/theme-next.org/_posts/tree/master/vue-travel项目笔记.md" class="post-edit-link" title="编辑" target="_blank">
+                    <i class="fa fa-pencil"></i>
+                  </a>
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-12 17:50:40" itemprop="dateCreated datePublished" datetime="2018-08-12T17:50:40+08:00">2018-08-12</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">15k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">14 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>跟学一个vue实战教程，记录的笔记以及项目注意事项，细节。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="vue-travel"><a href="#vue-travel" class="headerlink" title="vue-travel"></a>vue-travel</h1><p><img src="http://pd92xwp9t.bkt.clouddn.com/vue-travel.gif" alt="项目展示"></p>
+<h2 id="1-初始化项目"><a href="#1-初始化项目" class="headerlink" title="1. 初始化项目"></a>1. 初始化项目</h2><h3 id="1-1-手机显示配适"><a href="#1-1-手机显示配适" class="headerlink" title="1.1 手机显示配适"></a>1.1 手机显示配适</h3><p><code>minimum-scale=1.0,maximum-scale=1.0,user-scalable=no&quot;</code> 阻止用户手滑发大缩小页面</p>
+<h3 id="1-2-初始化样式-–-gt-引入reset-css"><a href="#1-2-初始化样式-–-gt-引入reset-css" class="headerlink" title="1.2 初始化样式 –&gt;引入reset.css"></a>1.2 初始化样式 –&gt;引入reset.css</h3><h3 id="1-3-移动端多倍屏边框不准的问题-–-gt-引入-border-css"><a href="#1-3-移动端多倍屏边框不准的问题-–-gt-引入-border-css" class="headerlink" title="1.3 移动端多倍屏边框不准的问题 –&gt; 引入 border.css"></a>1.3 移动端多倍屏边框不准的问题 –&gt; 引入 border.css</h3><h3 id="1-4-解决click延迟300ms的问题-–-gt-引入-fastclick-库"><a href="#1-4-解决click延迟300ms的问题-–-gt-引入-fastclick-库" class="headerlink" title="1.4 解决click延迟300ms的问题 –&gt; 引入 fastclick 库"></a>1.4 解决click延迟300ms的问题 –&gt; 引入 fastclick 库</h3><ul>
+<li><code>npm install fastclick --save</code></li>
+<li>在main.js中引入fastclick <code>import fastClick from &#39;fastclick&#39;</code></li>
+<li><code>fastClick.attach(document.body)</code><h3 id="1-5-注册阿里的iconfont并创建travel项目"><a href="#1-5-注册阿里的iconfont并创建travel项目" class="headerlink" title="1.5 注册阿里的iconfont并创建travel项目"></a>1.5 注册阿里的iconfont并创建travel项目</h3></li>
+</ul>
+<h2 id="2-首页的开发"><a href="#2-首页的开发" class="headerlink" title="2. 首页的开发"></a>2. 首页的开发</h2><h3 id="2-1-准备工作-amp-注意事项"><a href="#2-1-准备工作-amp-注意事项" class="headerlink" title="2.1 准备工作&amp;注意事项"></a>2.1 准备工作&amp;注意事项</h3><h4 id="1-项目中使用stylus来编写css样式"><a href="#1-项目中使用stylus来编写css样式" class="headerlink" title="(1).项目中使用stylus来编写css样式"></a>(1).项目中使用stylus来编写css样式</h4><p><code>npm install stylus --save</code>  <code>npm install stylus-loader --save</code></p>
+<ul>
+<li>要学习stylus语法</li>
+<li><p>学习flex布局 rem布局的用法</p>
+<h4 id="2-iconfont的使用和代码的优化"><a href="#2-iconfont的使用和代码的优化" class="headerlink" title="(2). iconfont的使用和代码的优化"></a>(2). iconfont的使用和代码的优化</h4></li>
+<li><p>如何使用iconfont</p>
+<blockquote>
+<ol>
+<li>进入iconfont官网，选择图标，加入购物车放入项目中</li>
+<li>下载zip包并解压，把字体文件放入src/assets/styles/iconfont文件夹中<br>把iconfont.css放在src/assets/styles中，把css中的文件路径改一下（因为此时&gt;css和字体文件不在同一目录下了，默认的css和字体文件在一个文件夹内）</li>
+<li>在main.js中引入字体文件 <code>import &#39;./assets/styles/iconfont.css&#39;</code></li>
+<li>上述完成后，在想要使用图标的标签上加入 <code>iconfont</code> 类名，就可以在页面中使用 &gt;图标了，可以用每一个图标类名来引用，也可以使用编码的形式来使用，每一个图标的编码<br>都在 iconfont官网我的项目图标里面，点击复制图标就能得到图标编码；</li>
+</ol>
+</blockquote>
+</li>
+<li><p>优化代码</p>
+<blockquote>
+<p>有些代码的样式是多变的，我们可以将可变的css放入assets styles文件夹的varibles.styl文件中，方便以后的更爱–》改一处全部就改的效果</p>
+</blockquote>
+</li>
+</ul>
+<p>例如：<br>我们的背景色就是一个可改变的css参数，我们可以在varibles.styl中定义 <code>$bgcolor = #00bcd4</code> 背景色<br>而后在样式里引入这个styl文件即可<br><code>@import &#39;../../../assets/styles/varibles.styl&#39;;</code><br><code>background-color $bgcolor</code></p>
+<p>但是@import文件引入的前缀非常长，在可以使用@符号可以优化此问题<br>因为我们在webpack配置js文件中制定<code>&#39;@&#39;: resolve(&#39;src&#39;),</code> 制定了@就是src目录<br>但是我们在css中引入css文件是 需要使用src的时候 要在@前面再多加一个~符号</p>
+<p>相同的 我们的sytles文件夹多次使用 我们可以在webapck.config.js文件中定义<br><code>&#39;styles&#39;: resolve(&#39;src/assets/styles&#39;),</code><br>这样我们使用styles目录的时候就可以简化了</p>
+<h4 id="3-在github上创建新分支"><a href="#3-在github上创建新分支" class="headerlink" title="(3). 在github上创建新分支"></a>(3). 在github上创建新分支</h4><blockquote>
+<p>在企业级的开发里，每一个新功能或新模块的开发都是在一个新的分支上进行<br>开发完成后再合并到master主分支上</p>
+</blockquote>
+<pre><code>在github上创建仓库：
+Create a new repository on the command line
+
+touch README.md
+git init
+git add README.md
+git commit -m &quot;first commit&quot;
+git remote add &lt;name&gt; &lt;url&gt; 
+git push -u origin master
+
+在本地新建一个分支： git branch Branch1
+切换到你的新分支: git checkout Branch1
+将新分支发布在github上： git push origin Branch1
+在本地删除一个分支： git branch -d Branch1
+在github远程端删除一个分支： git push origin :Branch1   (分支名前的冒号代表删除)
+</code></pre><h4 id="4-管理分支的一些语法"><a href="#4-管理分支的一些语法" class="headerlink" title="(4).管理分支的一些语法"></a>(4).管理分支的一些语法</h4><ol>
+<li>查看分支</li>
+</ol>
+<ul>
+<li><p>查看本地分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git branch</span><br><span class="line">* master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看远程分支<br><code>git branch -r</code></p>
+</li>
+<li>查看所有分支<br><code>git branch -a</code></li>
+</ul>
+<ol start="2">
+<li><p>本地创建新的分支<br><code>git branch [branch name]</code></p>
+</li>
+<li><p>切换到新的分支<br><code>git checkout [branch name]</code></p>
+</li>
+<li><p>创建+切换分支<br><code>git checkout -b [branch name]</code><br>git checkout -b [branch name] 的效果相当于以下两步操作:<br><code>git branch [branch name] + git checkout [branch name]</code></p>
+</li>
+<li><p>将新分支推送到github<br><code>git push origin [branch name]</code> orgin是你远程仓库的名字</p>
+</li>
+<li><p>删除本地分支<br><code>git branch -d [branch name]</code></p>
+</li>
+<li><p>删除github远程分支<br><code>git push origin :[branch name]</code>  分支名前的冒号代表删除。 </p>
+</li>
+<li><p>合并分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git merge &lt;name&gt;/&lt;new-branch-name&gt;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="2-2-首页轮播"><a href="#2-2-首页轮播" class="headerlink" title="2.2 首页轮播"></a>2.2 首页轮播</h3><p>首页轮播图，采用vue-awesome-swiper插件</p>
+<blockquote>
+<p><a href="https://github.com/surmon-china/vue-awesome-swiper" target="_blank" rel="noopener">vue-awesome-swiper github</a></p>
+</blockquote>
+<p>npm装包</p>
+<blockquote>
+<p><code>npm install vue-awesome-swiper@2.6.7 --save</code></p>
+</blockquote>
+<p>使用方法和使用步骤参考官网</p>
+<p>在swiper-slide标签里填入img属性并引入src 加入类swiper-img 在style里定义width的宽度为100% 即可适应轮播</p>
+<blockquote>
+<p>此时的页面在网速不好的情况下会发生页面抖动 如何解决<br>在轮播元素的最外层加一个class为wrapper的div 然后定义.wrapper的样式<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.wrapper</span><br><span class="line">  <span class="attribute">overflow</span> hidden</span><br><span class="line">  <span class="attribute">width</span> <span class="number">100%</span></span><br><span class="line">  <span class="attribute">height</span> <span class="number">0</span></span><br><span class="line">  <span class="attribute">padding-bottom</span>: <span class="number">26.67%</span></span><br><span class="line">  <span class="attribute">background</span> <span class="number">#eee</span></span><br><span class="line">  .swiper-img</span><br><span class="line">    <span class="attribute">width</span> <span class="number">100%</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>这样就能把轮播图的位置保持撑起，就不会发生页面抖动了</p>
+<blockquote>
+<p>此时，又有一个问题，我们需要导航点，怎么实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">swiperOption: &#123;</span><br><span class="line">        pagination: &apos;.swiper-pagination&apos;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>在swiperOption里添加pagination配置项就可以了</p>
+<blockquote>
+<p>此时的导航激活状态是蓝色的 怎么更改为白色？<br>我们可以在页面查看小原点的类名为<code>swiper-pagination-bullet-active</code>，我们如果直接在样式中修改这个样式的background，是达不到更改效果的，为什么，因为此时的样式是当前组件的样式，而这个小圆点属于swiper组件的样式<br><strong>这时，我们可以使用穿透样式来实现</strong><br>在样式的最前面编写如下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.wrapper &gt;&gt;&gt; .swiper-pagination-bullet-active</span><br><span class="line">    background: #eee</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>这样，就能达到从一个组件穿刺到另一个组件的样式更改</p>
+<blockquote>
+<p>最后 使用v-for 对图标进行列表渲染循环，把数据保存到data的swiperList对象中 </p>
+</blockquote>
+<h3 id="2-3-图标区域页面布局"><a href="#2-3-图标区域页面布局" class="headerlink" title="2.3 图标区域页面布局"></a>2.3 图标区域页面布局</h3><p><strong>初始化</strong></p>
+<ul>
+<li>git创建分支</li>
+<li>新建icons.vue</li>
+<li>Home.vue中引入组件</li>
+</ul>
+<p><strong>图标区域逻辑实现</strong></p>
+<blockquote>
+<p>当页面图标大于八个 可以左右拖动</p>
+</blockquote>
+<ol>
+<li>在图标元素外加入swiper-slide标签和swiper标签</li>
+</ol>
+<h3 id="2-4-首页推荐组件开发"><a href="#2-4-首页推荐组件开发" class="headerlink" title="2.4 首页推荐组件开发"></a>2.4 首页推荐组件开发</h3><h3 id="2-5-周末游组件开发"><a href="#2-5-周末游组件开发" class="headerlink" title="2.5 周末游组件开发"></a>2.5 周末游组件开发</h3><h2 id="3-使用ajax传递数据"><a href="#3-使用ajax传递数据" class="headerlink" title="3 使用ajax传递数据"></a>3 使用ajax传递数据</h2><h3 id="3-1-准备工作"><a href="#3-1-准备工作" class="headerlink" title="3.1 准备工作"></a>3.1 准备工作</h3><blockquote>
+<p>vue官方推荐使用axios来完成ajax数据的请求</p>
+</blockquote>
+<ul>
+<li>装包: <code>npm install axios --save</code></li>
+<li>home组件中引入axios</li>
+<li>结合vue的mouted生命周期钩子来完成请求</li>
+</ul>
+<p>如果每个子组件都发送一个ajax请求来获取数据的话，一个首页就要请求多个ajax请求，会使我们的程序效率下降，我们可以在home组件请求一个ajax请求，把数据传给子组件，这样就能提高效率</p>
+<blockquote>
+<p>怎么模拟后台的数据呢？</p>
+</blockquote>
+<p><strong>因为我们页面整直接访问static文件夹</strong>,所以我们可以在static下创建一个mock文件夹，里面定影json文件来模拟后台数据</p>
+<p>但是我们并不想提交我们的数据到github，所以我们可以在gitnore文件中排除文件</p>
+<p>我们上线后的ajax请求地址都是基本都是相对路径’/api/下的json文件，但是此时我们的文件在static/mock文件夹中，我们可以把axios的请求地址改成我们本地的static/mock，但是这样做的话以后上线前要更改代码，这是不可取的</p>
+<blockquote>
+<p>即使用api文件目录，又能获取到static中的文件，怎么办？</p>
+</blockquote>
+<p>我们可以使用vue基于webpack-dev-serve的一个配置选项来解决这个问题，在vuecli生成的config文件夹中index.js文件有一个<code>proxyTable</code>配置选项<br>我们可以这样来替换我们的请求地址：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">proxyTable: &#123;</span><br><span class="line">      <span class="string">'/api'</span>: &#123;</span><br><span class="line">        target: <span class="string">'http://localhost:8080'</span>,</span><br><span class="line">        pathRewrite: &#123;</span><br><span class="line">          <span class="string">'^/api'</span>: <span class="string">'/static/mock'</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样，就能完美解决我们的问题了</p>
+<blockquote>
+<p>注意，json格式的每一项的最后一项不要加带分号，这样可能会导致json数据解析失败</p>
+</blockquote>
+<h3 id="3-2-首页父子组件数据传递"><a href="#3-2-首页父子组件数据传递" class="headerlink" title="3.2 首页父子组件数据传递"></a>3.2 首页父子组件数据传递</h3><p>由于home组件获取json数据后，应该向子组件传递数据，这就涉及到父组件向子组件传值的问题<br>父组件通过属性向子组件传值，子组件props接受数据<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  getHomeInfo () &#123;</span><br><span class="line">    axios.get(<span class="string">'/api/index.json'</span>) <span class="comment">// 返回的是一个promise对象，后面使用then</span></span><br><span class="line">      .then(<span class="keyword">this</span>.getHomeInfoSucc) <span class="comment">// 获取成功执行getHomeInfoSucc函数</span></span><br><span class="line">  &#125;,</span><br><span class="line">  getHomeInfoSucc (res) &#123;</span><br><span class="line">    res = res.data</span><br><span class="line">    <span class="keyword">if</span> (res.ret &amp;&amp; res.data) &#123;</span><br><span class="line">      <span class="keyword">const</span> data = res.data</span><br><span class="line">      <span class="keyword">this</span>.city = data.city</span><br><span class="line">      <span class="keyword">this</span>.swiperList = data.swiperList</span><br><span class="line">      <span class="keyword">this</span>.iconList = data.iconList</span><br><span class="line">      <span class="keyword">this</span>.recommendList = data.recommendList</span><br><span class="line">      <span class="keyword">this</span>.weekendList = data.weekendList</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(res)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line">mounted () &#123;</span><br><span class="line">  <span class="keyword">this</span>.getHomeInfo() <span class="comment">// 页面挂载好执行这个方法ajax获取数据</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-首页的开发"><a href="#3-首页的开发" class="headerlink" title="3. 首页的开发"></a>3. 首页的开发</h2><h3 id="3-1-初始化准备"><a href="#3-1-初始化准备" class="headerlink" title="3.1 初始化准备"></a>3.1 初始化准备</h3><ul>
+<li>配置路由</li>
+<li>创建组件</li>
+</ul>
+<h3 id="3-2-header开发"><a href="#3-2-header开发" class="headerlink" title="3.2 header开发"></a>3.2 header开发</h3><ul>
+<li>创建组件</li>
+<li>city.vue导入</li>
+</ul>
+<h3 id="3-3-搜索框"><a href="#3-3-搜索框" class="headerlink" title="3.3 搜索框"></a>3.3 搜索框</h3><ul>
+<li>创建组件</li>
+<li>city.vue导入</li>
+</ul>
+<h3 id="3-4-城市列表"><a href="#3-4-城市列表" class="headerlink" title="3.4 城市列表"></a>3.4 城市列表</h3><ul>
+<li>创建组件</li>
+<li>city.vue导入</li>
+</ul>
+<blockquote>
+<p>title聊表的边框不太明显，可以给其添加样式<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.border-topbottom</span></span><br><span class="line">  &amp;<span class="selector-pseudo">:before</span></span><br><span class="line">    <span class="selector-tag">border-color</span> <span class="selector-id">#ccc</span></span><br><span class="line">  &amp;<span class="selector-pseudo">:after</span></span><br><span class="line">    <span class="selector-tag">border-color</span> <span class="selector-id">#ccc</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>因为我们将要使用一个滚动插件–Better-scroll来完成此页面，所以我们应该禁止页面的超出滚动<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.list</span></span><br><span class="line">  <span class="selector-tag">overflow</span> <span class="selector-tag">hidden</span></span><br><span class="line">  <span class="selector-tag">position</span> <span class="selector-tag">absolute</span></span><br><span class="line">  <span class="selector-tag">top</span> 1<span class="selector-class">.58rem</span></span><br><span class="line">  <span class="selector-tag">left</span> 0</span><br><span class="line">  <span class="selector-tag">right</span> 0</span><br><span class="line">  <span class="selector-tag">bottom</span> 0</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>使用<strong>Better-scroll</strong></p>
+<ul>
+<li>装包 npm install better-scroll –save</li>
+<li>import Bscroll from ‘better-scroll’</li>
+<li>在vue的mounted时挂载一个better-scroll实例</li>
+</ul>
+<blockquote>
+<p>因为这个组件需要最外城的wrapper dom元素 我们给最外层标签添加ref=”wrapper”属性</p>
+</blockquote>
+<h3 id="3-5-字母滑动选择器"><a href="#3-5-字母滑动选择器" class="headerlink" title="3.5 字母滑动选择器"></a>3.5 字母滑动选择器</h3><ul>
+<li>创建组件</li>
+<li>city.vue导入</li>
+</ul>
+<p>使用flex布局使其居中</p>
+<h3 id="3-6-ajax获取城市数据"><a href="#3-6-ajax获取城市数据" class="headerlink" title="3.6 ajax获取城市数据"></a>3.6 ajax获取城市数据</h3><ul>
+<li>在city.vue中引入city.json</li>
+<li>父子间向子组件传递消息</li>
+</ul>
+<h3 id="3-7-兄弟组件联动"><a href="#3-7-兄弟组件联动" class="headerlink" title="3.7 兄弟组件联动"></a>3.7 兄弟组件联动</h3><p><strong>Todo1. 点击右侧字母表 list也跳到对应的城市也部分</strong></p>
+<p>循环字母列表时为每一个字母绑定点击事件<br>alphabet组件传递消息给父组件city，city在传递消息给list组件，实现Alphabet和list的兄弟传值</p>
+<ul>
+<li><strong>Alphabet.vue</strong><br><code>@click=&quot;handleLetterClick&quot;</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">handleLetterClick (e) &#123;</span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">'change'</span>, e.target.innerText)</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>City.vue</strong><br><code>@change=&quot;handleLetterChange&quot;</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">handleLetterChange (letter) &#123;</span><br><span class="line">      this.letter = letter</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><code>:letter=&quot;letter&quot;</code> 传递给list.vue组件</p>
+<ul>
+<li><strong>List.vue</strong><br>props 接收 letter<br>通过watch来监听letter的变化<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">  letter () &#123; <span class="comment">// 监听letter改变</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.letter) &#123;</span><br><span class="line">      <span class="keyword">const</span> element = <span class="keyword">this</span>.$refs[<span class="keyword">this</span>.letter][<span class="number">0</span>]</span><br><span class="line">      <span class="comment">// refs--&gt;通过为每个循环绑定ref ref的值对应的是每个key 也就是每个字母</span></span><br><span class="line">      <span class="comment">// [0]--&gt;取到的是一个数组，具体的元素dom节点为数组的第一项</span></span><br><span class="line">      <span class="keyword">this</span>.scroll.scrollToElement(element)</span><br><span class="line">      <span class="comment">// scroll插件的而一个方法帮我们调到制定元素</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>Todo2. 滑动右侧字母表，list跟着滑动到对应的位置</strong></p>
+<ul>
+<li><strong>Alphabet.vue</strong><br>绑定star move end 三个触摸方法<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@touchstart=<span class="string">"handleTouchStart"</span></span><br><span class="line">@touchmove=<span class="string">"handleTouchMove"</span></span><br><span class="line">@touchEnd=<span class="string">"handleTouchEnd"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>把字母表从cities获取放到计算属性letters中<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">    letters () &#123;</span><br><span class="line">      <span class="keyword">const</span> letters = []</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> <span class="keyword">this</span>.cities) &#123;</span><br><span class="line">        letters.push(i)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> letters</span><br><span class="line">      <span class="comment">// ['A','B','C'...]</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure></p>
+<p>将计算出的滑到哪个字母$emit传递给父元素<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">handleTouchMove (e) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.touchStatus) &#123;</span><br><span class="line">        <span class="keyword">const</span> startY = <span class="keyword">this</span>.$refs[<span class="string">'A'</span>][<span class="number">0</span>].offsetTop <span class="comment">// A元素距离顶部的高度</span></span><br><span class="line">        <span class="keyword">const</span> touchY = e.touches[<span class="number">0</span>].clientY - <span class="number">79</span> <span class="comment">// 手指距离header下边缘的的距离</span></span><br><span class="line">        <span class="keyword">const</span> index = <span class="built_in">Math</span>.floor((touchY - startY) / <span class="number">22</span>) <span class="comment">// 滑动了第几个字母</span></span><br><span class="line">        <span class="keyword">if</span> (index &gt;= <span class="number">0</span> &amp;&amp; index &lt; <span class="keyword">this</span>.letters.length) &#123;</span><br><span class="line">          <span class="keyword">this</span>.$emit(<span class="string">'change'</span>, <span class="keyword">this</span>.letters[index])</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// console.log(index)</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>City.vue</strong><br>@change=”handleLetterChange”接收来自Alphabet的letter<br><code>:letter=&quot;letter&quot;</code> 传递给list<br>同样的和1一样使用watch来监视</li>
+</ul>
+<p><strong>Todo3. 列表组件优化</strong></p>
+<ol>
+<li><code>const startY = this.$refs[&#39;A&#39;][0].offsetTop</code><br>startY的值是固定的，可以提取出来</li>
+</ol>
+<p>放在updated生命周期函数钩子中，因为刚开始加载citise是通过json获取的，刚开始获取不到的时候是空，之后有获取到了ajax的内容，页面更新，就会执行updated钩子函数</p>
+<ol start="2">
+<li>函数节流<br>手指在屏幕上滑动的时候，函数执行的次数是非常高的，我们可以采用函数节流<br>通过定义一个定时器，来大大提高我们代码性能<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">handleTouchMove (e) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.touchStatus) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.timer) &#123;</span><br><span class="line">      clearTimeout(<span class="keyword">this</span>.timer)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> touchY = e.touches[<span class="number">0</span>].clientY - <span class="number">79</span> <span class="comment">// 手指距离header下边缘的的距离</span></span><br><span class="line">      <span class="keyword">const</span> index = <span class="built_in">Math</span>.floor((touchY - <span class="keyword">this</span>.startY) / <span class="number">22</span>) <span class="comment">// 滑动了第几个字母</span></span><br><span class="line">      <span class="keyword">if</span> (index &gt;= <span class="number">0</span> &amp;&amp; index &lt; <span class="keyword">this</span>.letters.length) &#123;</span><br><span class="line">        <span class="keyword">this</span>.$emit(<span class="string">'change'</span>, <span class="keyword">this</span>.letters[index])</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// console.log(index)</span></span><br><span class="line">    &#125;, <span class="number">10</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="3-7-完善搜索框–逻辑"><a href="#3-7-完善搜索框–逻辑" class="headerlink" title="3.7 完善搜索框–逻辑"></a>3.7 完善搜索框–逻辑</h3><ul>
+<li>在search.vue增加search-content类 用于展示搜索内容<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"search-content"</span> ref=<span class="string">"search"</span> v-show=<span class="string">"keyword"</span>&gt;</span><br><span class="line">  &lt;ul&gt;</span><br><span class="line">    &lt;li</span><br><span class="line">      <span class="class"><span class="keyword">class</span></span>=<span class="string">"search-item border-bottom"</span></span><br><span class="line">      v-<span class="keyword">for</span>=<span class="string">"item of list"</span></span><br><span class="line">      :key=<span class="string">"item.id"</span></span><br><span class="line">    &gt;</span><br><span class="line">      &#123;&#123;item.name&#125;&#125;</span><br><span class="line">    &lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">    &lt;li class="search-item border-bottom" v-show="hasNoData"&gt;</span></span><br><span class="line"><span class="regexp">      没有找到匹配数据</span></span><br><span class="line"><span class="regexp">    &lt;/</span>li&gt;</span><br><span class="line">  &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>ref = search 用于在mounted挂载滚动插件 v-show=”keyword” 没有输入内容不显示</p>
+</blockquote>
+<ul>
+<li><p>在watch中监听keyword的变化，使用循环遍历，通过筛选把符合的city追加到list数组</p>
+</li>
+<li><p>使用v-for循环输出list</p>
+</li>
+<li><p>中间使用了定时器来实现函数节流来提高性能</p>
+</li>
+</ul>
+<h2 id="4-使用Vuex来实现数据共享"><a href="#4-使用Vuex来实现数据共享" class="headerlink" title="4.使用Vuex来实现数据共享"></a>4.使用Vuex来实现数据共享</h2><h3 id="4-1-实现city和home组件的数据联动"><a href="#4-1-实现city和home组件的数据联动" class="headerlink" title="4.1 实现city和home组件的数据联动"></a>4.1 实现city和home组件的数据联动</h3><blockquote>
+<p>我们想要城市页面和首页实现数据共享<br>City.vue和Home.vue是没有一个父组件可供中转，那么想进行两者的通信，该怎么办呢？</p>
+</blockquote>
+<p><strong>Vuex</strong></p>
+<ul>
+<li>npm install vuex –save</li>
+<li><p>在src目录下创建store文件夹并新建index.js文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123; <span class="comment">// 向外暴露一个由Actions State Mutations 三个组成的系统对象</span></span><br><span class="line">  state: &#123;</span><br><span class="line">    city: <span class="string">'aaa'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// actions: &#123;</span></span><br><span class="line">  <span class="comment">//   changeCity (ctx, city) &#123; // 借助这个ctx上下文来使用commit方法来调用Mutations完成数据的更改</span></span><br><span class="line">  <span class="comment">//     console.log(city)</span></span><br><span class="line">  <span class="comment">//     console.log(ctx)</span></span><br><span class="line">  <span class="comment">//     ctx.commit('MchangeCity', city)</span></span><br><span class="line">  <span class="comment">//   &#125;</span></span><br><span class="line">  <span class="comment">// &#125;,</span></span><br><span class="line">  mutations: &#123;</span><br><span class="line">    MchangeCity (state, city) &#123;</span><br><span class="line">      state.city = city</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在main.js中引入<br><code>import store from &#39;./store&#39; // vuex</code> 这样我们全局都能访问到store了<br>并在vue实例中申明store,这样，我们以后就能使用vuex的数据了</p>
+
+</li>
+</ul>
+<p><strong>具体使用</strong></p>
+<ol>
+<li>把要公用的数据（例如city）定义到store/index.js的state中，在页面中把有city的地方换成 <code></code></li>
+<li><p>我们为循环的每一个城市按钮绑定一个方法 <code>@click=&quot;handleCityClick(item.name)</code><br>并在methods中定义方法:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  handleCityClick (city) &#123;</span><br><span class="line">    <span class="keyword">this</span>.$store.commit(<span class="string">'MchangeCity'</span>, city) <span class="comment">// 想要通过actions调用方法必须使用dispatch 或者 跳过actions直接通过commit来调用Mutations</span></span><br><span class="line">    <span class="keyword">this</span>.$router.push(<span class="string">'/'</span>) <span class="comment">// 选择后跳转到主页 实现联动 用了vue-router的编程跳转链接</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在store中定义Actions函数和Mutations函数 来实现数据的修改</p>
+</li>
+</ol>
+<p><strong>总结:</strong></p>
+<blockquote>
+<p>想要通过vuex来管理公用数据,想要更改数据 要经过一下步骤</p>
+<ol>
+<li>组件 —dispatch—&gt; Actions<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  handleCityClick (city) &#123;</span><br><span class="line">    <span class="keyword">this</span>.$store.dispatch(<span class="string">'changeCity'</span>, city) <span class="comment">// 想要通过actions调用方法必须使用dispatch</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li><p>Actions —commit—&gt; Mutations</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">actions: &#123;</span><br><span class="line">    changeCity (ctx, city) &#123; <span class="comment">// 借助这个ctx上下文来使用commit方法来调用Mutations完成数据的更改</span></span><br><span class="line">      ctx.commit(<span class="string">'MchangeCity'</span>, city)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Mutations ——&gt; State </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mutations: &#123;</span><br><span class="line">  MchangeCity (state, city) &#123;</span><br><span class="line">    state.city = city</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>在不复杂的环境下，有的时候我们更爱数据并不一定需要经过Actions，组件可以直接通过commit来使Mutations改变State</p>
+</blockquote>
+<ol>
+<li><p>组件 —commit—&gt; Mutations</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  handleCityClick (city) &#123;</span><br><span class="line">    <span class="keyword">this</span>.$store.commit(<span class="string">'MchangeCity'</span>, city) <span class="comment">// 想要通过actions调用方法必须使用dispatch</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Mutations ——&gt; State </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mutations: &#123;</span><br><span class="line">  MchangeCity (state, city) &#123;</span><br><span class="line">    state.city = city</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="4-2-vuex的高级使用和localStorage"><a href="#4-2-vuex的高级使用和localStorage" class="headerlink" title="4.2 vuex的高级使用和localStorage"></a>4.2 vuex的高级使用和localStorage</h3><blockquote>
+<p>上述我们已经完成了vuex 实现两个不先练的组件的数据共享，但是我们一旦刷新我们的页面，我们的页面数据还是默认的我们在store中定义的数据，如何让程序记录我们的操作</p>
+</blockquote>
+<p><strong>使用localStorage来完成</strong><br>在Mutations定义的方法里 加入：<br><code>localStorage.city = city</code> 来记录我们选择的城市<br>在state中<br><code>city: localStorage.city || &#39;南阳&#39;</code><br>这样 浏览器就能记忆我们选择的城市了 </p>
+<blockquote>
+<p>但是此时存在一个问题，浏览器如果使用了隐身模式或者关闭了浏览器存储，我们的程序就会直接报错无法执行<br>我们可以使用try catch来优化一下我们的代码</p>
+</blockquote>
+<hr>
+<p><strong>vuex高级</strong></p>
+<ol>
+<li><p>慢慢的 我们的store- index中的代码越来越多，我们可以把状态分开到不同的文件中管理</p>
+</li>
+<li><p>使用map辅助函数来进行优化</p>
+</li>
+</ol>
+<h3 id="4-3-使用keep-alive优化网页性能"><a href="#4-3-使用keep-alive优化网页性能" class="headerlink" title="4.3 使用keep-alive优化网页性能"></a>4.3 使用keep-alive优化网页性能</h3><blockquote>
+<p>路由发生切换的时候 ajax都会被重新发送，为什么？</p>
+</blockquote>
+<p>因为我们的页面每一次渲染都会执行mounted钩子 而我们的ajax请求就是放在mounted中进行的</p>
+<blockquote>
+<p>怎么优化？</p>
+</blockquote>
+<p>将我们的router-view坑用keep-alive标签包裹起来<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">keep-alive</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">router-view</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">keep-alive</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>页面被keep-alive包裹起来，就会是页面的资源加载到内存当中，不需要重新渲染，也不需要从新执行钩子，来回返回页面也只会获取一次json<br>此时，我们的vue中多出来一个生命周期函数钩子：<code>activated</code></p>
+<h3 id="4-4-选择城市后返回页面-页面需要被修改"><a href="#4-4-选择城市后返回页面-页面需要被修改" class="headerlink" title="4.4 选择城市后返回页面 页面需要被修改"></a>4.4 选择城市后返回页面 页面需要被修改</h3><blockquote>
+<p>我们之前写的代码是固定的，虽然选择的城市发生变化,但是我们的我们的home页面中的内容并没有变化，怎么办？</p>
+</blockquote>
+<p>我们home首页的内容是有index.json ajax来获取的 我们只需要在home组件获得ajax的时候 使用？传参的方式，使得每一个城市对应自己的json文件，就可以了<br> <code>axios.get(&#39;/api/index.json?city=&#39; + this.city</code></p>
+<blockquote>
+<p>但是此时的json文件被缓存到了内存当中，存的还是第一次的值，我们怎么改变缓存的数据呢</p>
+</blockquote>
+<p>由于此时的页面被keep-alive标签包裹，我们的ajax请求只会在第一次刷新的时候被获取，但是此时我们需要由城市列表选择的城市来同步我们首页的json文件以达到统一刷新的目的</p>
+<blockquote>
+<p>keep-detail 可以加入exclude=”不被缓存的组件名字” 这样就可以指定排除某个组件不被缓存</p>
+</blockquote>
+<p><strong>此时我们可以使用activated生命周期钩子</strong><br>因为在被包裹keep-alive标签之后，mounted钩子不会执行，但是activated钩子只要页面重新出现，就会执行，所以我们可以在activated钩子函数中 判断页面选择的城市和之前的城市是否为一个城市，如果不是一个城市，则重新发送ajax请求<br>我们在data数据中新增一个 <code>lastcity</code> 数据 配合<code>activated</code>钩子使用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">activated () &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.lastcity !== <span class="keyword">this</span>.city) &#123;</span><br><span class="line">    <span class="keyword">this</span>.lastcity = <span class="keyword">this</span>.city</span><br><span class="line">    <span class="keyword">this</span>.getHomeInfo()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="5-详情页面的制作"><a href="#5-详情页面的制作" class="headerlink" title="5.详情页面的制作"></a>5.详情页面的制作</h2><p>创建detail.vue Banner.vue 导入detail路由</p>
+<h3 id="5-1-banner的制作"><a href="#5-1-banner的制作" class="headerlink" title="5.1 banner的制作"></a>5.1 banner的制作</h3><ul>
+<li><p>字体图标更新后 记得替换字体文件和iconfont.css的一段 base64的代码、</p>
+</li>
+<li><p>使用 <code>background-image linear-gradient</code> 达到渐变效果</p>
+</li>
+</ul>
+<h3 id="5-2-banner画廊组件"><a href="#5-2-banner画廊组件" class="headerlink" title="5.2 banner画廊组件"></a>5.2 banner画廊组件</h3><blockquote>
+<p>这个画廊组件不仅仅这个组件中要使用，以后可能在别的地方也会使用</p>
+</blockquote>
+<p>所以我们新建 src/common/gallary/Gallary.vue 编写画廊组件为以后复用</p>
+<ul>
+<li><p>使用swiper插件实现图片轮播滚动</p>
+</li>
+<li><p>当我们点击banner的时候调到画廊页面，会发现渲染有问题，怎么办？<br>点击跳转dom节点，会使得我们的css属性计算出错，从而造成错误，swiper为我们提供了一组配置，我们在配置项里添加 <code>observeParents: true</code> 和 <code>observer: true</code><br>observeParents: 将observe应用于Swiper的父元素。当Swiper的父元素变化时，例如window.resize，Swiper更新。<br>observer: 启动动态检查器(OB/观众/观看者)，当改变swiper的样式（例如隐藏/显示）或者修改swiper的子元素时，自动初始化swiper。</p>
+</li>
+</ul>
+<h3 id="5-3-渐隐逐显的header"><a href="#5-3-渐隐逐显的header" class="headerlink" title="5.3 渐隐逐显的header"></a>5.3 渐隐逐显的header</h3><ul>
+<li>页面有两个头部，一个是刚进去的的定位为abs的返回按钮，另外一个是定位是fixed头部导航</li>
+<li><p>刚开始我们使用v-show = showAbs 和 v-show = ！showAbs 来分别控制两个头部，使其只显示一个</p>
+</li>
+<li><p>使用 <code>window.addEventListener(&#39;scroll&#39;, this.handleScroll)</code> 来监听滚动的距离以切换哪个头部的展示 这个方法放在<code>activated</code>钩子里</p>
+</li>
+<li><p>handleScroll方法使用 document.documentElement.scrollTop 监听滚动离顶部的距离</p>
+</li>
+</ul>
+<blockquote>
+<p>展示效果做好，剩下渐隐渐显的效果</p>
+</blockquote>
+<p>在 fixed 的头部标签绑定样式对象 <code>:style=&quot;opacityStyle&quot;</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">handleScroll () &#123;</span><br><span class="line">      <span class="keyword">const</span> top = <span class="built_in">document</span>.documentElement.scrollTop</span><br><span class="line">      <span class="keyword">if</span> (top &gt; <span class="number">60</span>) &#123; <span class="comment">// 过渡阶段</span></span><br><span class="line">        <span class="keyword">let</span> opacity = top / <span class="number">140</span> <span class="comment">// 过渡效果</span></span><br><span class="line">        opacity = opacity &gt; <span class="number">1</span> ? <span class="number">1</span> : opacity</span><br><span class="line">        <span class="keyword">this</span>.opacityStyle = &#123; opacity &#125;</span><br><span class="line">        <span class="keyword">this</span>.showAbs = <span class="literal">false</span></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.showAbs = <span class="literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="5-4-事件绑定的相关问题"><a href="#5-4-事件绑定的相关问题" class="headerlink" title="5.4 事件绑定的相关问题"></a>5.4 事件绑定的相关问题</h3><p>我们在5.3中，使用 <code>window.addEventListener(&#39;scroll&#39;, this.handleScroll)</code> 来监听滚动的距离，但是这个监听方法被绑定在了全局window中，所以我们的其他页面滚动时也会执行这段代码</p>
+<blockquote>
+<p>那么 我们怎么样才能使其只绑定在详情页呢？<br>当我们使用keep-alive标签的时候，activated钩子函数产生的同时，也产生了一个deactivated的函数钩子，在activated绑定，在deactivated解绑即可<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">activated () &#123;</span><br><span class="line"> <span class="built_in">window</span>.addEventListener(<span class="string">'scroll'</span>, <span class="keyword">this</span>.handleScroll) <span class="comment">// 页面展示绑定</span></span><br><span class="line">&#125;,</span><br><span class="line">deactivated() &#123;</span><br><span class="line">  <span class="built_in">window</span>.removeEventListener(<span class="string">'scroll'</span>, <span class="keyword">this</span>.handleScroll)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="5-5-递归列表组件"><a href="#5-5-递归列表组件" class="headerlink" title="5.5 递归列表组件"></a>5.5 递归列表组件</h3><blockquote>
+<p>组件自生调用自己</p>
+</blockquote>
+<h3 id="5-6-ajax数据替换"><a href="#5-6-ajax数据替换" class="headerlink" title="5.6 ajax数据替换"></a>5.6 ajax数据替换</h3><blockquote>
+<p>我们发现，首页滑动到底部，在点击详情页面，详情页面初始状态也是在底部，怎么办？</p>
+</blockquote>
+<p>页面滑动 各个组件会相互影响，我们可以在路由的配置选项中添加如下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scrollBehavior: function (to, from, savedPosition) &#123;</span><br><span class="line">  return savedPosition || &#123; x: 0, y: 0 &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://cn.vuejs.org/v2/guide/migration-vue-router.html#saveScrollPosition-替换" target="_blank" rel="noopener">router进阶</a></p>
+<blockquote>
+<p>每个组件的export defalut的name是干什么用的？</p>
+</blockquote>
+<p>我们目前接触到的：</p>
+<ol>
+<li>递归组件中可以用到它</li>
+<li>对某个页面取消缓存的时候</li>
+<li>vue tools中组件的显示名字</li>
+</ol>
+<h2 id="6-Vue项目上线前准备"><a href="#6-Vue项目上线前准备" class="headerlink" title="6 Vue项目上线前准备"></a>6 Vue项目上线前准备</h2><h3 id="6-1-Vue项目的接口联调"><a href="#6-1-Vue项目的接口联调" class="headerlink" title="6.1 Vue项目的接口联调"></a>6.1 Vue项目的接口联调</h3><blockquote>
+<p>我们之前都是自己模拟后端的数据，实际项目中，我们是要和后端的数据，实现项目联调，如何进行？</p>
+</blockquote>
+<p>把mock中的数据替换成真正的后端服务器数据</p>
+<p>把config index.js 中的api制定的路径改为后端服务器的地址 一般都是本地80端口，一般是一下的形式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">proxyTable: &#123;</span><br><span class="line">  <span class="string">'/api'</span>: &#123;</span><br><span class="line">    target: <span class="string">'http://localhost:80'</span> </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="6-2-Vue项目的真机测试"><a href="#6-2-Vue项目的真机测试" class="headerlink" title="6.2 Vue项目的真机测试"></a>6.2 Vue项目的真机测试</h3><p>我们的项目是 通过 Webpack dev server 来进行的 它默认不支持ip地址的访问方式，要把它的默认配置项修改</p>
+<p>在package.json下 修改dev配置项 <code>webpack-dev-server --host 0,0,0,0</code><br>这样，就可以直接通过手机用ip地址来访问我们的项目</p>
+<blockquote>
+<p>在真机上，我们拖动字母表，会发现整个页面都跟着滚动，出现了bug，怎么半？</p>
+</blockquote>
+<p><a href="mailto:`@touchstart.prevent" target="_blank" rel="noopener">`@touchstart.prevent</a>=”handleTouchStart”` 组织拖动的默认行为</p>
+<blockquote>
+<p>在低版本的安卓浏览器，可能出现白屏现象，怎么办？</p>
+</blockquote>
+<p>出现白屏现象的原因大部分是因为手机浏览器不支持promise特性，我们在项目中安装一个第三方的包</p>
+<ul>
+<li><code>npm install babel-polyfill --save</code></li>
+<li>在main.js引入包 <code>import &#39;babel-polyfill&#39;</code></li>
+</ul>
+<h3 id="6-3-Vue项目的打包上线"><a href="#6-3-Vue项目的打包上线" class="headerlink" title="6.3 Vue项目的打包上线"></a>6.3 Vue项目的打包上线</h3><ol>
+<li>运行命令 npm run build  生成一个能被浏览器运行的代码，打包完成后，项目目录中多出来一个dist文件夹，里面就是是上线代码</li>
+<li>dist文件夹里的文件放到服务器跟目录中，就能上线了</li>
+<li>如果想把上线文件放到根目录以外的地方，我们可以更改我们的config/index.js –&gt; build–&gt; assetsPublicPath路径</li>
+</ol>
+<h2 id="End-To-Do"><a href="#End-To-Do" class="headerlink" title="End To Do"></a>End To Do</h2><h3 id="vue基础官方文档熟连掌握"><a href="#vue基础官方文档熟连掌握" class="headerlink" title="vue基础官方文档熟连掌握"></a>vue基础官方文档熟连掌握</h3><h3 id="VueRouter-细节"><a href="#VueRouter-细节" class="headerlink" title="VueRouter 细节"></a>VueRouter 细节</h3><h3 id="Vuex-细节"><a href="#Vuex-细节" class="headerlink" title="Vuex 细节"></a>Vuex 细节</h3><h3 id="Vue-服务器端渲染-（难）"><a href="#Vue-服务器端渲染-（难）" class="headerlink" title="Vue 服务器端渲染 （难）"></a>Vue 服务器端渲染 （难）</h3><p>###　Webpack Bable Es6</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>noobakong</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://noobakong.gitee.io/2018/08/12/vue-travel项目笔记/" title="vue-travel项目笔记">https://noobakong.gitee.io/2018/08/12/vue-travel项目笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag"><i class="fa fa-tag"></i> vue</a>
+          
+            <a href="/tags/project/" rel="tag"><i class="fa fa-tag"></i> project</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/04/vue笔记/" rel="next" title="Vue-笔记">
+                <i class="fa fa-chevron-left"></i> Vue-笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/25/vue-music-1/" rel="prev" title="vue-music项目笔记(1)">
+                vue-music项目笔记(1) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.png"
+                alt="noobakong" />
+            
+              <p class="site-author-name" itemprop="name">noobakong</p>
+              <p class="site-description motion-element" itemprop="description">代码和艺术,本应相通。</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/noobakong" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiao-jiao-se-i/" target="_blank" title="知乎"><i class="fa fa-fw fa-angellist"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-travel"><span class="nav-text">vue-travel</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-初始化项目"><span class="nav-text">1. 初始化项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-手机显示配适"><span class="nav-text">1.1 手机显示配适</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-初始化样式-–-gt-引入reset-css"><span class="nav-text">1.2 初始化样式 –&gt;引入reset.css</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-移动端多倍屏边框不准的问题-–-gt-引入-border-css"><span class="nav-text">1.3 移动端多倍屏边框不准的问题 –&gt; 引入 border.css</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-解决click延迟300ms的问题-–-gt-引入-fastclick-库"><span class="nav-text">1.4 解决click延迟300ms的问题 –&gt; 引入 fastclick 库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-注册阿里的iconfont并创建travel项目"><span class="nav-text">1.5 注册阿里的iconfont并创建travel项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-首页的开发"><span class="nav-text">2. 首页的开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-准备工作-amp-注意事项"><span class="nav-text">2.1 准备工作&amp;注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-项目中使用stylus来编写css样式"><span class="nav-text">(1).项目中使用stylus来编写css样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-iconfont的使用和代码的优化"><span class="nav-text">(2). iconfont的使用和代码的优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-在github上创建新分支"><span class="nav-text">(3). 在github上创建新分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-管理分支的一些语法"><span class="nav-text">(4).管理分支的一些语法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-首页轮播"><span class="nav-text">2.2 首页轮播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-图标区域页面布局"><span class="nav-text">2.3 图标区域页面布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-首页推荐组件开发"><span class="nav-text">2.4 首页推荐组件开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-周末游组件开发"><span class="nav-text">2.5 周末游组件开发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-使用ajax传递数据"><span class="nav-text">3 使用ajax传递数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-准备工作"><span class="nav-text">3.1 准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-首页父子组件数据传递"><span class="nav-text">3.2 首页父子组件数据传递</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-首页的开发"><span class="nav-text">3. 首页的开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-初始化准备"><span class="nav-text">3.1 初始化准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-header开发"><span class="nav-text">3.2 header开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-搜索框"><span class="nav-text">3.3 搜索框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-城市列表"><span class="nav-text">3.4 城市列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-字母滑动选择器"><span class="nav-text">3.5 字母滑动选择器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-ajax获取城市数据"><span class="nav-text">3.6 ajax获取城市数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-兄弟组件联动"><span class="nav-text">3.7 兄弟组件联动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-完善搜索框–逻辑"><span class="nav-text">3.7 完善搜索框–逻辑</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-使用Vuex来实现数据共享"><span class="nav-text">4.使用Vuex来实现数据共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-实现city和home组件的数据联动"><span class="nav-text">4.1 实现city和home组件的数据联动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-vuex的高级使用和localStorage"><span class="nav-text">4.2 vuex的高级使用和localStorage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-使用keep-alive优化网页性能"><span class="nav-text">4.3 使用keep-alive优化网页性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-选择城市后返回页面-页面需要被修改"><span class="nav-text">4.4 选择城市后返回页面 页面需要被修改</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-详情页面的制作"><span class="nav-text">5.详情页面的制作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-banner的制作"><span class="nav-text">5.1 banner的制作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-banner画廊组件"><span class="nav-text">5.2 banner画廊组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-渐隐逐显的header"><span class="nav-text">5.3 渐隐逐显的header</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-事件绑定的相关问题"><span class="nav-text">5.4 事件绑定的相关问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-递归列表组件"><span class="nav-text">5.5 递归列表组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6-ajax数据替换"><span class="nav-text">5.6 ajax数据替换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Vue项目上线前准备"><span class="nav-text">6 Vue项目上线前准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-Vue项目的接口联调"><span class="nav-text">6.1 Vue项目的接口联调</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-Vue项目的真机测试"><span class="nav-text">6.2 Vue项目的真机测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-Vue项目的打包上线"><span class="nav-text">6.3 Vue项目的打包上线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#End-To-Do"><span class="nav-text">End To Do</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vue基础官方文档熟连掌握"><span class="nav-text">vue基础官方文档熟连掌握</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VueRouter-细节"><span class="nav-text">VueRouter 细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vuex-细节"><span class="nav-text">Vuex 细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-服务器端渲染-（难）"><span class="nav-text">Vue 服务器端渲染 （难）</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">noobakong</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">103k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:34</span>
+  
+</div>
+
+
+
+
+  <div class="powered-by">己不从心，身又岂能由己</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="跟学一个vue-music 音乐播放器实战教程，记录的笔记以及项目注意事项，细节。">
+<meta name="keywords" content="vue,project">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue-music项目笔记(1)">
+<meta property="og:url" content="https://noobakong.gitee.io/2018/08/25/vue-music-1/index.html">
+<meta property="og:site_name" content="noobakong">
+<meta property="og:description" content="跟学一个vue-music 音乐播放器实战教程，记录的笔记以及项目注意事项，细节。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/11993435-5beedd367a4e0b16.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/11993435-700bb2cea1af7320.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-09-29T08:43:01.877Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue-music项目笔记(1)">
+<meta name="twitter:description" content="跟学一个vue-music 音乐播放器实战教程，记录的笔记以及项目注意事项，细节。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/11993435-5beedd367a4e0b16.gif?imageMogr2/auto-orient/strip">
+
+
+
+
+
+
+  <link rel="canonical" href="https://noobakong.gitee.io/2018/08/25/vue-music-1/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>vue-music项目笔记(1) | noobakong</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">noobakong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">我爱一个姓许的女孩~</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://noobakong.gitee.io/2018/08/25/vue-music-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="noobakong">
+      <meta itemprop="description" content="代码和艺术,本应相通。">
+      <meta itemprop="image" content="/images/touxiang.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="noobakong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue-music项目笔记(1)<a href="https://github.com/theme-next/theme-next.org/_posts/tree/master/vue-music-1.md" class="post-edit-link" title="编辑" target="_blank">
+                    <i class="fa fa-pencil"></i>
+                  </a>
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-25 11:45:14" itemprop="dateCreated datePublished" datetime="2018-08-25T11:45:14+08:00">2018-08-25</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">25k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">23 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>跟学一个vue-music 音乐播放器实战教程，记录的笔记以及项目注意事项，细节。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="Vue-Music"><a href="#Vue-Music" class="headerlink" title="Vue-Music"></a>Vue-Music</h1><p><img src="http://upload-images.jianshu.io/upload_images/11993435-5beedd367a4e0b16.gif?imageMogr2/auto-orient/strip" alt="项目展示"></p>
+<h2 id="一-前期工作"><a href="#一-前期工作" class="headerlink" title="一| 前期工作"></a>一| 前期工作</h2><h3 id="1-项目初始化"><a href="#1-项目初始化" class="headerlink" title="1.项目初始化"></a>1.项目初始化</h3><ul>
+<li>npm install -g vue-cli</li>
+<li>vue init webpack vue-music</li>
+<li>npm install stylus stylus-loader -D</li>
+<li>修改eslint.js</li>
+<li>修改webpack.base.conf.js resolve配置项简化路径</li>
+</ul>
+<h3 id="2-装包"><a href="#2-装包" class="headerlink" title="2.装包"></a>2.装包</h3><ul>
+<li><p>npm install fastclick –save 取消默认300ms延迟</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> fastClick <span class="keyword">from</span> <span class="string">'fastclick'</span></span><br><span class="line">fastClick.attach(<span class="built_in">document</span>.body)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>npm install babel-polyfill<br>对es6的高级语法进行转义当运行环境中并没有实现的一些方法，babel-polyfill 会给其做兼容<br>需要在main.js中引入</p>
+</li>
+<li>npm install babel-runtime –save 辅助编译 不需要引入即可用</li>
+</ul>
+<blockquote>
+<p>babel-runtime 是供编译模块复用工具函数。是锦上添花<br>babel-polyfil是雪中送炭，是转译没有的api.</p>
+</blockquote>
+<h2 id="二-顶部tab导航-amp-amp-Recommend-页面组件开发"><a href="#二-顶部tab导航-amp-amp-Recommend-页面组件开发" class="headerlink" title="二| 顶部tab导航 &amp;&amp; Recommend 页面组件开发"></a>二| 顶部tab导航 &amp;&amp; Recommend 页面组件开发</h2><h3 id="1-顶部导航栏-tab"><a href="#1-顶部导航栏-tab" class="headerlink" title="1. 顶部导航栏 tab"></a>1. 顶部导航栏 tab</h3><p>建立基本的页面骨架，基本的组件引入<br>header rank recommend search singer tab 这几个组件组成页面骨架</p>
+<h3 id="2-recommend组件"><a href="#2-recommend组件" class="headerlink" title="2. recommend组件"></a>2. recommend组件</h3><ul>
+<li><strong>数据获取</strong><br>qq音乐</li>
+</ul>
+<h4 id="Jsonp"><a href="#Jsonp" class="headerlink" title="Jsonp"></a>Jsonp</h4><blockquote>
+<p>Jsonp发送的不是一个ajax请求，他动态创建一个script标签，script没有同源策略限制，所以能跨域  有一个返回参数 callback ， 后端解析url，返回一个方法。</p>
+</blockquote>
+<ul>
+<li>安装： npm install <a href="mailto:jsonp@0.2.1" target="_blank" rel="noopener">jsonp@0.2.1</a><br><a href="https://github.com/webmodules/jsonp" target="_blank" rel="noopener">jsonp github仓库</a></li>
+<li>以后需要多出引用jsonp跨域请求，将其创建在 <code>scr/common/jsonp.js</code> 中</li>
+</ul>
+<h4 id="jsonp-promise化"><a href="#jsonp-promise化" class="headerlink" title="jsonp promise化"></a>jsonp promise化</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> originJSONP <span class="keyword">from</span> <span class="string">'jsonp'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">jsonp</span>(<span class="params">url, data, option</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// jsonp的三个参数</span></span><br><span class="line">  <span class="comment">// - url--&gt;一个纯净的url地址</span></span><br><span class="line">  <span class="comment">// - data --&gt; url中的 query 通过 data 拼到url上</span></span><br><span class="line">  <span class="comment">// - option</span></span><br><span class="line">  url += (url.indexOf(<span class="string">'?'</span>) &lt; <span class="number">0</span> ? <span class="string">'?'</span> : <span class="string">'&amp;'</span>) + param(data)</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    originJSONP(url, option, (err, data) =&gt; &#123;</span><br><span class="line">      <span class="keyword">if</span> (!err) &#123;</span><br><span class="line">        resolve(data)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        reject(err)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"> <span class="comment">// 拼接data到url</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">param</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> url = <span class="string">''</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> data) &#123;</span><br><span class="line">    <span class="keyword">let</span> value = data[k] !== <span class="literal">undefined</span> ? data[k] : <span class="string">''</span></span><br><span class="line">    url += <span class="string">`&amp;<span class="subst">$&#123;k&#125;</span>=<span class="subst">$&#123;<span class="built_in">encodeURIComponent</span>(value)&#125;</span>`</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// encodeURIComponent() 函数可把字符串作为 URI 组件进行编码。</span></span><br><span class="line">  <span class="keyword">return</span> url ? url.substring(<span class="number">1</span>) : <span class="string">''</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意</strong>：当路径报错的时候，我们要想到webpack.base.conf.js配置文件中的 alias 选项 确保路径是否匹配</p>
+</blockquote>
+<h4 id="Recommend的数据获取"><a href="#Recommend的数据获取" class="headerlink" title="Recommend的数据获取"></a>Recommend的数据获取</h4><ol>
+<li>在 <code>recommend.vue</code> 中的 <code>created</code> 生命周期钩子中调用<code>_getRecommend</code> 方法</li>
+<li><code>_getRecommend</code> 方法调用<code>recommend.js</code>中暴露出来的<code>getRecommend</code>方法</li>
+<li>而 <code>getRecommend</code> 方法调用了 <code>Jsonp</code> 方法， Jsonp方法抓取接口，从而获得数据</li>
+</ol>
+<blockquote>
+<ul>
+<li>有的jsonp接口url很长，但是真正的url知识前面的部分</li>
+<li>大公司一般用0来代表一切正常</li>
+</ul>
+</blockquote>
+<h4 id="轮播图组件"><a href="#轮播图组件" class="headerlink" title="轮播图组件"></a>轮播图组件</h4><ul>
+<li><strong>轮播图数据获取完成后，就下来做的就是搭建轮播页面 ，接下来编写一个轮播组件 <code>slider.vue</code></strong><ol>
+<li>新建<code>base</code>文件夹，储存如同slider.vue的基础组件<br>在silder.vue中，我们使用了slot插槽，外部引用slider的时候slider标签里面包裹的dom会被插入到slot插槽部分。</li>
+<li>在recommend.vue中 引入 <code>import Slider from &#39;base/slider/slider&#39;</code>,并在components中注册Slider，之后就可以使用Slider标签了</li>
+<li>将jsonp返回的slider数据存储到recommend数组中，然后遍历recommned 数组项循环渲染内容</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>这个时候我们打开项目，会发现已有数据，但是样式还不行，在props中添加loop，autoplay，interval（滚动间隔）， </p>
+</blockquote>
+<ul>
+<li><p><strong>使用了第三方轮播 better-scroll 来进一步实现 slider</strong></p>
+<blockquote>
+<p>新版的BS中snap属性集合成了一个对象选项 而旧版的是单独的属性名，这点要注意</p>
+<ol>
+<li>初始化BS，在什么时候初始化？<br>我们要保证渲染的时机是正确的，通常在<code>mounted</code>生命周期钩子中初始化，保证BS正常渲染的话我们通常在mounted里面加一个延迟<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mounted () &#123;</span><br><span class="line">   setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">// 浏览器17ms刷新一次， 这里延迟20ms 确保组件已经渲染完成</span></span><br><span class="line">     <span class="keyword">this</span>._setSliderWidth() <span class="comment">// 设置slider宽度</span></span><br><span class="line">     <span class="keyword">this</span>._initDots() <span class="comment">// 初始话dots</span></span><br><span class="line">     <span class="keyword">this</span>._initSlider() <span class="comment">// 初始化slider</span></span><br><span class="line">   &#125;, <span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li><p><code>_setSliderWidth</code>方法 – 轮播图组件的宽度计算<br>这里要注意，这时候执行玩宽度方法之后，可能无效，这是因为在宽度计算的时候，slot插槽里面的东西还未加载，为了解决这个问题，我们可以在recommend.vue中 给slider 的父元素 加上<code>v-if=&quot;recommends.length&quot;</code>,确保渲染时机正确</p>
+</li>
+<li><p><code>_initSlider()</code>方法 – 使用<code>new BScroll</code> 创建轮播实例，设置无限滚动及其他的相关初始化配置，至此，我们的轮播页面已经可以无缝滚动了  </p>
+</li>
+<li><p>添加dots导航</p>
+<blockquote>
+<p>五个数据，dom有七个，因为loop为ture的时候，bs会自动在前后各拷贝一份。我们想要添加dots，必须保证和数据数一样，所以我们应该在bs初始化之前完成dots的初始化</p>
+</blockquote>
+<p> 初始化dots为一个长度为childern.length的数组<br> <code>this.dots = new Array(this.children.length)</code><br> 在slider.vue中循环<br> <code>v-for=&quot;(item,index) of dots&quot;</code><br> 添加选中样式<br> <code>:class=&quot;{active:currentPageIndex === index}&quot;</code><br> 在bs滚动的时候 会派发一个事件 在初始化slider 绑定一个事件</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">this</span>.slider.on(<span class="string">'scrollEnd'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> pageIndex = <span class="keyword">this</span>.slider.getCurrentPage().pageX</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.loop) &#123;</span><br><span class="line">    pageIndex -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">this</span>.currentPageIndex = pageIndex</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.autoplay) &#123;</span><br><span class="line">      clearTimeout(<span class="keyword">this</span>.timer)</span><br><span class="line">      <span class="keyword">this</span>._play()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p> 使用了 bs中的 <code>getCurrentPage</code> 方法来获取滚动的当前页面<br> 在autoplay中使用了bs 的 <code>goToPage</code> 方法来实现轮播</p>
+</li>
+</ol>
+</li>
+<li><p><strong>监听窗口大小改变自动改变 &amp;&amp; 优化slider</strong></p>
+<blockquote>
+<p>之前的slider基本完成，但是此时如果改变窗口大小，页面就会乱掉</p>
+</blockquote>
+</li>
+</ul>
+<p>使用resize窗口监听事件，配合bs的refresh刷新方法 实现每一次改变窗口大小都能重置宽度<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'resize'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.slider) &#123; <span class="comment">// slider还没有初始化的时候</span></span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>._setSliderWidth(<span class="literal">true</span>)</span><br><span class="line">  <span class="keyword">this</span>.slider.refresh()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>在app.vue 中使用keepalive标签，来避免重复请求</p>
+<p>我们在跳转到其他页面的时候，要记得清理定时器，优化效率<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">destroyed() &#123;</span><br><span class="line">  clearTimeout(this.timer) // 性能优化小习惯</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="歌单组件"><a href="#歌单组件" class="headerlink" title="歌单组件"></a>歌单组件</h3><h4 id="歌单组件数据获取"><a href="#歌单组件数据获取" class="headerlink" title="歌单组件数据获取"></a>歌单组件数据获取</h4><p>在pc版的qq音乐中获取请求接口</p>
+<blockquote>
+<p>由于QQ音乐的歌单数据时，请求接口host和refer规定了必须是qq音乐的地址，我们本地就会请求失败。为了解决这个问题，我们可以使用 手动代理 伪装成qq音乐地址请求接口 欺骗接口</p>
+</blockquote>
+<h4 id="Vue-proxyTable代理-后端代理接口"><a href="#Vue-proxyTable代理-后端代理接口" class="headerlink" title="Vue proxyTable代理 后端代理接口"></a>Vue proxyTable代理 后端代理接口</h4><blockquote>
+<p> 在项目开发的时候，接口联调的时候一般都是同域名下，且不存在跨域的情况下进行接口联调，但是当我们现在使用vue-cli进行项目打包的时候，我们在本地启动服务器后，比如本地开发服务下是 <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> 这样的访问页面，但是我们的接口地址是 <a href="http://xxxx.com/save/index" target="_blank" rel="noopener">http://xxxx.com/save/index</a> 这样的接口地址，我们这样直接使用会存在跨域的请求，导致接口请求不成功，因此我们需要在打包的时候配置一下，我们进入 config/index.js 代码下如下配置即可：</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">dev: &#123;</span><br><span class="line">    <span class="comment">// 静态资源文件夹</span></span><br><span class="line">    assetsSubDirectory: <span class="string">'static'</span>,</span><br><span class="line">    <span class="comment">// 发布路径</span></span><br><span class="line">    assetsPublicPath: <span class="string">'/'</span>,</span><br><span class="line">    <span class="comment">// 代理配置表，在这里可以配置特定的请求代理到对应的API接口</span></span><br><span class="line">    <span class="comment">// 例如将'localhost:8080/api/xxx'代理到'www.example.com/api/xxx'</span></span><br><span class="line">    <span class="comment">// 使用方法：https://vuejs-templates.github.io/webpack/proxy.html</span></span><br><span class="line">    proxyTable: &#123;</span><br><span class="line">      <span class="string">'/'</span>: &#123;</span><br><span class="line">        target: <span class="string">'https://c.y.qq.com'</span>, <span class="comment">// 接口的域名</span></span><br><span class="line">        secure: <span class="literal">false</span>, <span class="comment">// 如果是https接口，需要配置这个参数</span></span><br><span class="line">        changeOrigin: <span class="literal">true</span>, <span class="comment">// 如果接口跨域，需要进行这个参数配置</span></span><br><span class="line">        pathRewrite: &#123;</span><br><span class="line">          <span class="string">'^/api'</span>: <span class="string">'/'</span></span><br><span class="line">        &#125;,</span><br><span class="line">        headers: &#123;</span><br><span class="line">          referer: <span class="string">'https://c.y.qq.com'</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意： ‘/api’ 为匹配项，target 为被请求的地址，因为在 ajax 的 url 中加了前缀 ‘/api’，而原本的接口是没有这个前缀的，所以需要通过 pathRewrite 来重写地址，将前缀 ‘/api’ 转为 ‘/‘。如果本身的接口地址就有 ‘/api’ 这种通用前缀，就可以把 pathRewrite 删掉。</p>
+</blockquote>
+<h4 id="表单组件开发"><a href="#表单组件开发" class="headerlink" title="表单组件开发"></a>表单组件开发</h4><p>我们通过代理获得ajax数据后，将其赋值给 discList<br><code>this.discList = res.data.list</code><br>之后将disclist渲染到组件中<br><code>v-for=&quot;item of discList&quot;</code></p>
+<ul>
+<li>滚动组件 Scroll.vue<br>由于 滚动 是一个很基础的组件 所以在common里创建scroll.vue组件，使代码结构化<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div ref=&quot;wrapper&quot;&gt;</span><br><span class="line">    &lt;slot&gt;&lt;/slot&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>在Recommend.vue中  一定要绑定data数据，因为scroll.vue中 watch 监听data数据的变化来刷新better-scroll 这里的可以绑定recommend.vue中的 discList 数组来座位 data</p>
+</blockquote>
+<blockquote>
+<p>这里的 recommends 和 discList 数据获取是有先后顺序的，一般都是先recommends再discList，如果先获取到的是discList的话 歌单列表就会出现滚动不到底部的问题</p>
+</blockquote>
+<p>为了确保recommend数据后加载的情况下我们的表单还能正常滚动发，我们可以给slider中的img添加一个loadImage方法<code>@load=&quot;loadImage&quot;</code>，方法调用一个 refresh方法即可 <code>this.$refs.scroll.refresh()</code><br>为了避免请求的每一张图片都执行一次，我们可以设置一个bool标志位来控制 ，只要有一张图片加载完成即可，如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">loadImage() &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.checkLoaded) &#123;</span><br><span class="line">    <span class="keyword">this</span>.$refs.scroll.refresh()</span><br><span class="line">    <span class="keyword">this</span>.checkLoaded = <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="表单组件优化"><a href="#表单组件优化" class="headerlink" title="表单组件优化"></a>表单组件优化</h4><ul>
+<li><strong>图片的懒加载</strong><blockquote>
+<p>节省流量，提升加载速度<br>npm 安装<br><code>npm install vue-lazyload</code><br>在main.js中添加代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> VueLazyLoad <span class="keyword">from</span> <span class="string">'vue-lazyload'</span></span><br><span class="line">Vue.use(VueLazyLoad, &#123;</span><br><span class="line">  loading: <span class="built_in">require</span>(<span class="string">'common/images/touxiang.png'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+<p>在Recommend.vue中使用<br><code>&lt;img v-lazy=&quot;item.imgurl&quot; alt=&quot;&quot;&gt;</code></p>
+<ul>
+<li><p><strong>解决图片点击失效</strong><br>有些情况下点击事件之间互相冲突，我们在使用fastclick的时候，可以给点击的dom添加一个fastclick里的一个css <code>needsclick</code>的类名，来确保点击事件可以正常执行</p>
+</li>
+<li><p><strong>loading组件</strong><br>为了增加交互体验，在表单还未渲染之前，我们可以使用一个loading来占位。</p>
+</li>
+</ul>
+<p>在base中新建loading组件<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"loading"</span>&gt;</span><br><span class="line">      &lt;img src=<span class="string">"./loading.gif"</span> alt=<span class="string">""</span>&gt;</span><br><span class="line">      &lt;p <span class="class"><span class="keyword">class</span></span>=<span class="string">"desc"</span>&gt;&#123;&#123;title&#125;&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">export default &#123;</span></span><br><span class="line"><span class="regexp">  props: &#123;</span></span><br><span class="line"><span class="regexp">    title: &#123;</span></span><br><span class="line"><span class="regexp">      type: String,</span></span><br><span class="line"><span class="regexp">      default: '许文瑞正在吃屎。。。。'</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在recommend.vue中添加如下代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"loading-content"</span> <span class="attr">v-show</span>=<span class="string">"!discList.length"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">loading</span>&gt;</span><span class="tag">&lt;/<span class="name">loading</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="三-歌手组件开发"><a href="#三-歌手组件开发" class="headerlink" title="三| 歌手组件开发"></a>三| 歌手组件开发</h2><h3 id="1-歌手首页开发"><a href="#1-歌手首页开发" class="headerlink" title="1.歌手首页开发"></a>1.歌手首页开发</h3><h4 id="数据获取"><a href="#数据获取" class="headerlink" title="数据获取"></a>数据获取</h4><ul>
+<li><p>数据获取依旧从qq音乐官网获取</p>
+<p><a href="https://c.y.qq.com/v8/fcg-bin/v8.fcg" target="_blank" rel="noopener">歌手接口</a></p>
+</li>
+<li><p>创建singer.js</p>
+<p>我们和以前一样，利用我们封装的jsonp等发放，来请求我们的接口，返回给singer.vue。</p>
+</li>
+</ul>
+<blockquote>
+<p>成功获取数据以后，我们发现，官网的数据的数据结构和我们想要的不一样，所以我们下一步进行数据结构的聚合处理</p>
+</blockquote>
+<h4 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h4><p>我们希望的数据结构是数据按照字母排序的数组再加上一个热门的数组的集合，显然我们在官网的到的数据不是这样的，我们构造一个_normalizeSinger方法来完成：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">_normalizeSinger(list) &#123; <span class="comment">// 处理数据结构 形参为list</span></span><br><span class="line">      <span class="keyword">let</span> map = &#123; <span class="comment">// 把数据都存在map对象中</span></span><br><span class="line">        hot: &#123; <span class="comment">// 热门城市</span></span><br><span class="line">          title: HOT_NAME,</span><br><span class="line">          items: [] <span class="comment">// 初始化空数组</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      list.forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123; <span class="comment">// 循环数组中的每一项</span></span><br><span class="line">        <span class="keyword">if</span> (index &lt; HOT_SINGER_LENGTH) &#123; <span class="comment">// 因为原始数据是按照热度排列的，所以获取前十的热门</span></span><br><span class="line">          map.hot.items.push(<span class="keyword">new</span> Singer(&#123; <span class="comment">// push到我们的hot数组中</span></span><br><span class="line">          <span class="comment">// new Singer: 为了模块化和减少代码的复用，我们在common &gt; js 创建了一个singer.js</span></span><br><span class="line">          <span class="comment">// 来创建一个类构造器 里面包括歌手头像的拼接</span></span><br><span class="line">            id: item.Fsinger_mid,</span><br><span class="line">            name: item.Fsinger_name</span><br><span class="line">          &#125;))</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> key = item.Findex <span class="comment">// 歌手姓氏字首字母</span></span><br><span class="line">        <span class="keyword">if</span> (!map[key]) &#123; <span class="comment">// 如果不存在</span></span><br><span class="line">          map[key] = &#123; <span class="comment">// 创建</span></span><br><span class="line">            title: key,</span><br><span class="line">            items: []</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        map[key].items.push(<span class="keyword">new</span> Singer(&#123; <span class="comment">// 追加到map.items中</span></span><br><span class="line">          id: item.Fsinger_mid,</span><br><span class="line">          name: item.Fsinger_name</span><br><span class="line">        &#125;))</span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 为了得到有序列表 我们需要处理map</span></span><br><span class="line">      <span class="keyword">let</span> hot = [] <span class="comment">// 热门城市</span></span><br><span class="line">      <span class="keyword">let</span> ret = [] <span class="comment">// 字母表城市</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> map) &#123; <span class="comment">// 循环</span></span><br><span class="line">        <span class="keyword">let</span> val = map[key]</span><br><span class="line">        <span class="keyword">if</span> (val.title.match(<span class="regexp">/[a-zA-Z]/</span>)) &#123; <span class="comment">// 正则匹配字母</span></span><br><span class="line">          ret.push(val)</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (val.title === HOT_NAME) &#123;</span><br><span class="line">          hot.push(val) <span class="comment">// 热门城市</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      ret.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a.title.charCodeAt(<span class="number">0</span>) - b.title.charCodeAt(<span class="number">0</span>) <span class="comment">// 把字母城市按charcode字母排序</span></span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> hot.concat(ret) <span class="comment">// 将字母城市追加到hot城市 返回给外部</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>细节点注意</strong></p>
+<blockquote>
+<p>关于歌手图片的获取，通过官网观察，我们发现图片是有一个网址拼接<code>item.Fsinger_mid</code> 来完成的，所以我们在common &gt;js &gt;singer.js中 使用了<code>${}</code>来拼接，获取歌手图片地址，拼接url语法是使用的是 <code></code> 而不是’ ‘</p>
+</blockquote>
+<h4 id="listview-vue开发"><a href="#listview-vue开发" class="headerlink" title="listview.vue开发"></a>listview.vue开发</h4><p>数据我们获取到了，我们接下来开发listview.vue组件，因为这个列表组件我们后面有很多页面也要用到，所以我们在base下创建基础组件 listview.vue</p>
+<p>在listview.vue中引入 我们之前封装好的scroll组件<br><code>import Scroll from &#39;base/scroll/scroll&#39;</code></p>
+<p>通过获取的数据，进行两次遍历渲染，就能得到我们想要的dom页面了</p>
+<p>html代码如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">scroll</span> <span class="attr">class</span>=<span class="string">"listview"</span> <span class="attr">:data</span>=<span class="string">"data"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(group, index) in data"</span> <span class="attr">:key</span>=<span class="string">"index"</span> <span class="attr">class</span>=<span class="string">"list-group"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">"list-group-title"</span>&gt;</span>&#123;&#123;group.title&#125;&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in group.items"</span> <span class="attr">:key</span>=<span class="string">"index"</span> <span class="attr">class</span>=<span class="string">"list-group-item"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">v-lazy</span>=<span class="string">"item.avatar"</span> <span class="attr">class</span>=<span class="string">"avatar"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"name"</span>&gt;</span>&#123;&#123;item.name&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-shortcut"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"item"</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in shortcutList"</span> <span class="attr">:key</span>=<span class="string">"index"</span>&gt;</span></span><br><span class="line">          &#123;&#123;item&#125;&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">scroll</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>至此 歌手页面就能正常滚动了</p>
+<h4 id="shortcutList字母导航器"><a href="#shortcutList字母导航器" class="headerlink" title="shortcutList字母导航器"></a>shortcutList字母导航器</h4><p>接下来，<strong>开始我们的字母导航器的样式制作</strong></p>
+<p>我们可以在listview.vue中创建一个计算属性shortcutList</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">      shortcutList() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.data.map(<span class="function">(<span class="params">group</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> group.title.substr(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+<p>之后在页面中v-for渲染shortcutList即可 配合css样式 实现边栏的字母导航dom的制作</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span></span></span><br><span class="line"><span class="tag">  <span class="attr">class</span>=<span class="string">"list-shortcut"</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">touchstart</span>=<span class="string">"onShortcutTouchStart"</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">touchmove.stop.prevent</span>=<span class="string">"onShortcutTouchMove"</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span></span></span><br><span class="line"><span class="tag">      <span class="attr">class</span>=<span class="string">"item"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">v-for</span>=<span class="string">"(item, index) in shortcutList"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:key</span>=<span class="string">"index"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:data-index</span>=<span class="string">"index"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">:class</span>=<span class="string">"&#123;'current': currentIndex === index&#125;"</span></span></span><br><span class="line"><span class="tag">    &gt;</span></span><br><span class="line">      &#123;&#123;item&#125;&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>静态的字母导航在页面中已经展现出来了</p>
+<p>接下来 <strong>来给导航器添加滑动点击等事件，使其动态化</strong></p>
+<ul>
+<li><p><strong>滑动右边字母导航 listview实时滚动</strong></p>
+<p>在字母html标签中加入touch事件**</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@touchstart=&quot;onShortcutTouchStart&quot;</span><br><span class="line">@touchmove.stop.prevent=&quot;onShortcutTouchMove&quot;</span><br></pre></td></tr></table></figure>
+<p>在循环中遍历index值，在后面的touch中获取索引，由于蕾类似此类获取数据的方法是很多地方都能用到的，我们在dom.js中添加getData方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">export function getData(el, name, val) &#123;</span><br><span class="line">  const perfix = &apos;data-&apos;</span><br><span class="line">  name = perfix + name</span><br><span class="line">  if (val) &#123;</span><br><span class="line">    return el.setAttribute(name, val)</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    return el.getAttribute(name)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来 为scroll组件添加 跳转方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scrollTo() &#123;</span><br><span class="line">      <span class="keyword">this</span>.scroll &amp;&amp; <span class="keyword">this</span>.scroll.scrollTo.apply(<span class="keyword">this</span>.scroll, <span class="built_in">arguments</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    scrollToElement() &#123;</span><br><span class="line">      <span class="keyword">this</span>.scroll &amp;&amp; <span class="keyword">this</span>.scroll.scrollToElement.apply(<span class="keyword">this</span>.scroll, <span class="built_in">arguments</span>)</span><br></pre></td></tr></table></figure>
+<p>完整的touch方法代码如下：</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">onShortcutTouchStart(e) &#123;</span><br><span class="line">      <span class="keyword">let</span> anchorIndex = getData(e.target, <span class="string">'index'</span>) <span class="comment">// 获取data</span></span><br><span class="line">      <span class="keyword">let</span> firstTouch = e.touches[<span class="number">0</span>] <span class="comment">// 刚开始触碰的位置坐标</span></span><br><span class="line">      <span class="keyword">this</span>.touch.y1 = firstTouch.pageY</span><br><span class="line">      <span class="keyword">this</span>.touch.anchorIndex = anchorIndex</span><br><span class="line">      <span class="keyword">this</span>._scrollTo(anchorIndex) <span class="comment">// 通过使用_scrollTo方法来跳转到我们的字母所在位置</span></span><br><span class="line">    &#125;,</span><br><span class="line">    onShortcutTouchMove(e) &#123; <span class="comment">// 屏幕滑动方法 要明确开始滚动和结束滚动的两个位置，然后计算出滚动到哪一个字母</span></span><br><span class="line">      <span class="keyword">let</span> firstTouch = e.touches[<span class="number">0</span>] <span class="comment">// 停止滚动时的位置坐标</span></span><br><span class="line">      <span class="keyword">this</span>.touch.y2 = firstTouch.pageY <span class="comment">// 保存到touch对象中</span></span><br><span class="line">      <span class="keyword">let</span> delta = (<span class="keyword">this</span>.touch.y2 - <span class="keyword">this</span>.touch.y1) / ANCHOR_HEIGHT | <span class="number">0</span> <span class="comment">// 计算滚动了多少个字母</span></span><br><span class="line">      <span class="keyword">let</span> anchorIndex = <span class="built_in">parseInt</span>(<span class="keyword">this</span>.touch.anchorIndex) + delta <span class="comment">// this.touch.anchorIndex 字符串转化为整型</span></span><br><span class="line">      <span class="keyword">this</span>._scrollTo(anchorIndex) <span class="comment">// 跳转到字母位置</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：通过getData方法的到的anchorIndex是一个字符串，记得要用parseInt转化为数字</p>
+</blockquote>
+<p>至此 滑动字母导航器 左边的list已经可以实现滚动了</p>
+<ul>
+<li><p>滚动左边list 右边字母导航高亮</p>
+<blockquote>
+<p>解决这个问题 ，就要知道左边listview滚动到的相对位置</p>
+</blockquote>
+<ol>
+<li><p>在data中增加scrollY 和 currentIndex来实时监听listview滚动的位置 和 应该滚动到的具体索引</p>
+</li>
+<li><p>在scroll标签组件绑定@scroll=’scroll’ 来将滚动的实时位置赋值给this.scrollY</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scroll(pos) &#123;</span><br><span class="line">  <span class="keyword">this</span>.scrollY = pos.y</span><br><span class="line">  <span class="built_in">console</span>.log(pos) <span class="comment">// 测试</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在listview中添加监视属性data</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">      setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">// 数据变化到dom变化有一个延迟，所以这个加一个定时器</span></span><br><span class="line">        <span class="keyword">this</span>._calculateHeight() <span class="comment">// 计算每一个group的高度</span></span><br><span class="line">      &#125;, <span class="number">20</span>)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>每次data变化，都会重新计算group的高度  </p>
+</blockquote>
+</li>
+<li><p>_calculateHeight方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">_calculateHeight() &#123;</span><br><span class="line">  <span class="keyword">this</span>.listHeight = []</span><br><span class="line">  <span class="keyword">const</span> list = <span class="keyword">this</span>.$refs.listGroup</span><br><span class="line">  <span class="keyword">let</span> height = <span class="number">0</span></span><br><span class="line">  <span class="keyword">this</span>.listHeight.push(height)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; list.length; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> item = list[i]</span><br><span class="line">    height += item.clientHeight</span><br><span class="line">    <span class="keyword">this</span>.listHeight.push(height) <span class="comment">// 得到一个包含每一个group高度的数组</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样 就能得到一个包含所有grroup高度的一个数据</p>
+</li>
+<li><p>在watch里监听scrollY</p>
+<blockquote>
+<p>拿到了每组的位置，我们可以监听scrollY 联合两者判断字母导航器应该滚动到的位置 </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">scrollY(newY) &#123;</span><br><span class="line">  <span class="keyword">const</span> listHeight = <span class="keyword">this</span>.listHeight</span><br><span class="line">  <span class="comment">// 当滚动到顶部 newY &gt; 0</span></span><br><span class="line">  <span class="keyword">if</span> (newY &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.currentIndex = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在中间部分滚动</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; listHeight.length; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> height1 = listHeight[i]</span><br><span class="line">    <span class="keyword">let</span> height2 = listHeight[i + <span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> (-newY &gt;= height1 &amp;&amp; -newY &lt; height2) &#123;</span><br><span class="line">      <span class="keyword">this</span>.currentIndex = i</span><br><span class="line">      <span class="keyword">this</span>.diff = height2 + newY <span class="comment">// 注意 newY为负值</span></span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 当滚动到底部，且-newY 大于最后一个元素的上线</span></span><br><span class="line">  <span class="keyword">this</span>.currentIndex = listHeight.length - <span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>currentIndex 绑定类 实现字母高亮</p>
+<p><code>:class=&quot;{&#39;current&#39;: currentIndex === index}&quot;</code></p>
+<p>​</p>
+</li>
+</ol>
+</li>
+<li><p>细节优化</p>
+<ol>
+<li><p>完善_scrollTo方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">_scrollTo(index) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!index &amp;&amp; index !== <span class="number">0</span>) &#123; <span class="comment">// 点击以外的部分 无反应</span></span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (index &lt; <span class="number">0</span>) &#123; <span class="comment">// 滑动到顶部时 index为负</span></span><br><span class="line">    index = <span class="number">0</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (index &gt; <span class="keyword">this</span>.listHeight.length - <span class="number">2</span>) &#123; <span class="comment">// 滑动到尾部</span></span><br><span class="line">    index = <span class="keyword">this</span>.listHeight.length - <span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.scrollY = -<span class="keyword">this</span>.listHeight[index] <span class="comment">// 每次点击都更改scrollY以实现同步</span></span><br><span class="line">  <span class="keyword">this</span>.$refs.listview.scrollToElement(<span class="keyword">this</span>.$refs.listGroup[index], <span class="number">300</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>fixedTitle</p>
+<p>计算属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fixedTitle() &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.scrollY &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.data[<span class="keyword">this</span>.currentIndex] ? <span class="keyword">this</span>.data[<span class="keyword">this</span>.currentIndex].title : <span class="string">''</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>页面html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-fixed"</span> <span class="attr">v-show</span>=<span class="string">"fixedTitle"</span> <span class="attr">ref</span>=<span class="string">"fixed"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"fixed-title"</span>&gt;</span>&#123;&#123;this.fixedTitle&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>至此 顶部的fixedtitle标题就做好了 但是我们发现两个title在重合的时候 并不是很完美，下面我们就来添加一个顶上去的动画来优化</p>
+</blockquote>
+<p>在scrollY函数中 我们可以轻松获取一个 diff 值 </p>
+<p><code>this.diff = height2 + newY // 注意 newY为负值</code></p>
+<p>通过监听diff 我们可以来实现我们的要求</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">diff(newVal) &#123;</span><br><span class="line">  <span class="keyword">let</span> fixedTop = (newVal &gt; <span class="number">0</span> &amp;&amp; newVal &lt; TITLE_HEIGHT) ? newVal - TITLE_HEIGHT : <span class="number">0</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.fixedTop === fixedTop) &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.fixedTop = fixedTop</span><br><span class="line">  <span class="keyword">this</span>.$refs.fixed.style.transform = <span class="string">`translate3d(0,<span class="subst">$&#123;fixedTop&#125;</span>px,0)`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-歌手详情页"><a href="#2-歌手详情页" class="headerlink" title="2.歌手详情页"></a>2.歌手详情页</h3><blockquote>
+<p>歌手详情使用二级子路由来开发</p>
+</blockquote>
+<h4 id="字路由-二级路由设置"><a href="#字路由-二级路由设置" class="headerlink" title="字路由 / 二级路由设置"></a>字路由 / 二级路由设置</h4><blockquote>
+<p>路由是由组件承载的</p>
+</blockquote>
+<p>在router – index.js中 写入代码</p>
+<p><strong>添加字路由</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">      path: <span class="string">'/singer'</span>,</span><br><span class="line">      name: <span class="string">'Singer'</span>,</span><br><span class="line">      component: Singer,</span><br><span class="line">      children: [</span><br><span class="line">        &#123;</span><br><span class="line">          path: <span class="string">':id'</span>,</span><br><span class="line">          component: SingerDetail</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>如代码所示，在Singer component组件路由选项中，添加<code>children</code> 实现二级路由，然后需要在页面上加上<code>router-view</code></p>
+<p>标签来挂在这个二级路由显示页面</p>
+<p><strong>编写跳转逻辑</strong></p>
+<p>在次页面中，二级路由的跳转是在listview.vue中通过点击事件向外派发事件来实现的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">selectItem(item) &#123;</span><br><span class="line">  <span class="keyword">this</span>.$emit(<span class="string">'select'</span>, item) <span class="comment">// 向外派发事件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>因为listview.vue是一个基础组件，不会编写业务逻辑，所以把点击事件派发出去，让外部实现业务逻辑的编写</p>
+</blockquote>
+<p>在singer.vue 中，我们监听到这个派发出来的select</p>
+<p><code>&lt;list-view :data=&quot;singers&quot; @select=&quot;selectSinger&quot;&gt;&lt;/list-view&gt;</code></p>
+<p>然后在selectSinger方法里面使用vue-router的 编程式跳转接口</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">selectSinger(singer) &#123;</span><br><span class="line">     <span class="keyword">this</span>.$router.push(&#123;</span><br><span class="line">       path: <span class="string">`/singer/<span class="subst">$&#123;singer.id&#125;</span>`</span> <span class="comment">// 跳转页面</span></span><br><span class="line">     &#125;)</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="添加转场动画"><a href="#添加转场动画" class="headerlink" title="添加转场动画"></a>添加转场动画</h4><p>将singer-detail.vue 组件用transition标签包裹</p>
+<p>并在css中添加动画</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.slide-enter-active</span>, <span class="selector-class">.slide-leave-active</span></span><br><span class="line">    <span class="attribute">transition</span>: all <span class="number">0.3s</span></span><br><span class="line"> .slide-enter, .slide-leave-to</span><br><span class="line">    transform: translate3d( <span class="number">0</span>, <span class="number">100%</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>就下来，开始正式开发singer-detail组件,在这之前，我们先了解一下Vuex <a href="#jumpvuex">跳转到vuex笔记</a></p>
+<h4 id="获取singer-detail数据"><a href="#获取singer-detail数据" class="headerlink" title="获取singer-detail数据"></a>获取singer-detail数据</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getSingerDetail</span>(<span class="params">singerId</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="string">'https://c.y.qq.com/v8/fcg-bin/fcg_v8_singer_track_cp.fcg'</span></span><br><span class="line">  <span class="keyword">const</span> data = <span class="built_in">Object</span>.assign(&#123;&#125;, commonParams, &#123;</span><br><span class="line">    hostUin: <span class="number">0</span>,</span><br><span class="line">    needNewCode: <span class="number">0</span>,</span><br><span class="line">    platform: <span class="string">'h5page'</span>,</span><br><span class="line">    order: <span class="string">'listen'</span>,</span><br><span class="line">    begin: <span class="number">0</span>,</span><br><span class="line">    num: <span class="number">50</span>,</span><br><span class="line">    songstatus: <span class="number">1</span>,</span><br><span class="line">    g_tk: <span class="number">649509476</span>,</span><br><span class="line">    singermid: singerId <span class="comment">// 注意是mid而不是id 不要出错</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> jsonp(url, data, options)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当在singer-detail页面上刷新的时候，会获取不到数据，因为我们的数据是通过跳转得到的，如果我们在singer-detail数据上刷新，将返回上一级signer <code>this.$router.push(&#39;/singer&#39;)</code></p>
+</blockquote>
+<h4 id="整理获取的数据结构"><a href="#整理获取的数据结构" class="headerlink" title="整理获取的数据结构"></a>整理获取的数据结构</h4><p><strong>common&gt;js&gt;song.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Song</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(&#123;id, mid, singer, name, album, duration, image, url&#125;) &#123;</span><br><span class="line">    <span class="keyword">this</span>.id = id</span><br><span class="line">    <span class="keyword">this</span>.mid = mid</span><br><span class="line">    <span class="keyword">this</span>.singer = singer</span><br><span class="line">    <span class="keyword">this</span>.name = name</span><br><span class="line">    <span class="keyword">this</span>.album = album</span><br><span class="line">    <span class="keyword">this</span>.duration = duration</span><br><span class="line">    <span class="keyword">this</span>.image = image</span><br><span class="line">    <span class="keyword">this</span>.url = url</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">createSong</span>(<span class="params">musicData</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Song(&#123;</span><br><span class="line">    id: musicData.songid,</span><br><span class="line">    mid: musicData.songmid,</span><br><span class="line">    singer: filterSonger(musicData.singer),</span><br><span class="line">    name: musicData.songname,</span><br><span class="line">    album: musicData.albumname,</span><br><span class="line">    duration: musicData.interval,</span><br><span class="line">    image: <span class="string">`https://y.gtimg.cn/music/photo_new/T002R300x300M000<span class="subst">$&#123;musicData.albummid&#125;</span>.jpg?max_age=2592000`</span>,</span><br><span class="line">    url: <span class="string">`http://ws.stream.qqmusic.qq.com/C100<span class="subst">$&#123;musicData.songmid&#125;</span>.m4a?fromtag=0&amp;guid=126548448&amp;crazycache=1`</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filterSonger</span>(<span class="params">singer</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> ret = []</span><br><span class="line">  <span class="keyword">if</span> (!singer) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span></span><br><span class="line">  &#125;</span><br><span class="line">  singer.forEach(<span class="function">(<span class="params">s</span>) =&gt;</span> &#123;</span><br><span class="line">    ret.push(s.name)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> ret.join(<span class="string">'/'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过方法调用类构造器，我们就能通过<code>createSong(musicData)</code>来整理获得我们需要的结构数据</p>
+<p><strong>singer-detail</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  _getDetail() &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.singer.id) &#123;</span><br><span class="line">      <span class="keyword">this</span>.$router.push(<span class="string">'/singer'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    getSingerDetail(<span class="keyword">this</span>.singer.id).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (res.code === ERR_OK) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res.data.list)</span><br><span class="line">        <span class="keyword">this</span>.songs = <span class="keyword">this</span>._normalizeSongs(res.data.list)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  _normalizeSongs(list) &#123;</span><br><span class="line">    <span class="keyword">let</span> ret = []</span><br><span class="line">    list.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> &#123;musicData&#125; = item</span><br><span class="line">      <span class="keyword">if</span> (musicData.songid &amp;&amp; musicData.albummid) &#123;</span><br><span class="line">        ret.push(createSong(musicData)) </span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> ret</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样 通过调用_normalizeSongs方法 –&gt; createSong 来得到songs数据</p>
+<h4 id="开发MusicList-vue组件"><a href="#开发MusicList-vue组件" class="headerlink" title="开发MusicList.vue组件"></a>开发MusicList.vue组件</h4><p>在props中接受变量 bgImgae songs title</p>
+<p>在singer-detail</p>
+<p>通过计算属性拿到title 和 bgImage ，</p>
+<p><code>&lt;music-list :songs=&quot;songs&quot; :title=&quot;title&quot; :bg-image=&quot;bgImage&quot;&gt;&lt;/music-list&gt;</code></p>
+<p>这样就完成了父组件的singer-detail向子组件的music-list的传值</p>
+<blockquote>
+<p>因为歌曲列表是滚动的 我们在music-list中复用了scroll组件</p>
+<p>我们还需要编写一个song-lsit组件，为接下来所用 <a href="#jumpsonglist">跳转到song-list组件开发</a></p>
+</blockquote>
+<p>在music-list编写代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;scroll</span><br><span class="line">  class=&quot;list&quot;</span><br><span class="line">  ref=&quot;list&quot;</span><br><span class="line">  :data=&quot;songs&quot;</span><br><span class="line">  :probe-type=&quot;probeType&quot;</span><br><span class="line">  :listen-scroll=&quot;listenScroll&quot;</span><br><span class="line">  @scroll=&quot;scroll&quot;</span><br><span class="line">&gt;</span><br><span class="line">  &lt;div class=&quot;song-list-wrapper&quot;&gt;</span><br><span class="line">    &lt;song-list :songs=&quot;songs&quot;&gt;&lt;/song-list&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;loading-container&quot; v-show=&quot;!songs.length&quot;&gt;</span><br><span class="line">    &lt;loading&gt;&lt;/loading&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/scroll&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>至此，打开页面，我们可以看到歌单列表已经可以正常滚动</p>
+</blockquote>
+<h5 id="1-解决图片撑开问题"><a href="#1-解决图片撑开问题" class="headerlink" title="1. 解决图片撑开问题"></a>1. 解决图片撑开问题</h5><blockquote>
+<p>这是我们发现我们的页面上全部被歌单列表所占用， 要计算图片的位置把歌手背景图展现出来</p>
+</blockquote>
+<p>在mounted生命周期钩子里添加</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$refs.list.$el.style.top = <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.$refs.bgImage.clientHeight&#125;</span>px`</span></span><br></pre></td></tr></table></figure>
+<p>这样就能实现歌手海报图的展示了</p>
+<h5 id="2-实现海报图跟着滚动的效果"><a href="#2-实现海报图跟着滚动的效果" class="headerlink" title="2. 实现海报图跟着滚动的效果"></a>2. 实现海报图跟着滚动的效果</h5><p>我们在music-list.vue中加入一个layer层，用于跟着跟单一起滚动，来覆盖我们的bg-image，这样就能视觉上达到我们想要的效果了</p>
+<p><code>&lt;div class=&quot;bg-layer&quot; ref=&quot;layer&quot;&gt;&lt;/div&gt;</code></p>
+<p>监听滚动距离</p>
+<p>为scroll组件传入probeType值和listenScroll值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">created() &#123;</span><br><span class="line">  this.probeType = 3</span><br><span class="line">  this.listenScroll = true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为scroll添加scroll方法来监听滚动距离</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scroll(pos) &#123;</span><br><span class="line">  <span class="keyword">this</span>.scrollY = pos.y</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>并监听scrollY数据 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">  scrollY(newY) &#123;</span><br><span class="line">    <span class="keyword">let</span> translateY = <span class="built_in">Math</span>.max(<span class="keyword">this</span>.minTranslateY, newY)</span><br><span class="line">    <span class="keyword">let</span> zIndex = <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span> scale = <span class="number">1</span></span><br><span class="line">    <span class="keyword">let</span> blur = <span class="number">0</span></span><br><span class="line">    <span class="keyword">this</span>.$refs.layer.style[transform] = <span class="string">`translate3d(0, <span class="subst">$&#123;translateY&#125;</span>px, 0)`</span></span><br><span class="line">    <span class="keyword">const</span> percent = <span class="built_in">Math</span>.abs(newY / <span class="keyword">this</span>.imageHeight)</span><br><span class="line">    <span class="keyword">if</span> (newY &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      scale = <span class="number">1</span> + percent</span><br><span class="line">      zIndex = <span class="number">10</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      blur = <span class="built_in">Math</span>.min(<span class="number">20</span> * percent, <span class="number">20</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.$refs.filter.style[backdrop] = <span class="string">`blur(<span class="subst">$&#123;blur&#125;</span>px)`</span></span><br><span class="line">    <span class="keyword">if</span> (newY &lt; <span class="keyword">this</span>.minTranslateY) &#123;</span><br><span class="line">      zIndex = <span class="number">10</span></span><br><span class="line">      <span class="keyword">this</span>.$refs.bgImage.style.paddingTop = <span class="number">0</span></span><br><span class="line">      <span class="keyword">this</span>.$refs.bgImage.style.height = <span class="string">`<span class="subst">$&#123;RESERVED_HEIGHT&#125;</span>px`</span></span><br><span class="line">      <span class="keyword">this</span>.$refs.pbtn.style.display = <span class="string">'none'</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.$refs.bgImage.style.paddingTop = <span class="string">'70%'</span></span><br><span class="line">      <span class="keyword">this</span>.$refs.bgImage.style.height = <span class="number">0</span></span><br><span class="line">      <span class="keyword">this</span>.$refs.pbtn.style.display = <span class="string">''</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.$refs.bgImage.style.zIndex = zIndex</span><br><span class="line">    <span class="keyword">this</span>.$refs.bgImage.style[transform] = <span class="string">`scale(<span class="subst">$&#123;scale&#125;</span>)`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-处理滚动到顶部的时候歌手title被歌单覆盖的问题"><a href="#3-处理滚动到顶部的时候歌手title被歌单覆盖的问题" class="headerlink" title="3. 处理滚动到顶部的时候歌手title被歌单覆盖的问题"></a>3. 处理滚动到顶部的时候歌手title被歌单覆盖的问题</h5><blockquote>
+<p>处理方法见上面代码zIndex相关操作</p>
+</blockquote>
+<h5 id="4-下滑的时候bg-image图片放大"><a href="#4-下滑的时候bg-image图片放大" class="headerlink" title="4. 下滑的时候bg-image图片放大"></a>4. 下滑的时候bg-image图片放大</h5><blockquote>
+<p>处理见上代码 bgImage scale相关的操作</p>
+</blockquote>
+<h5 id="５-加入loading组件"><a href="#５-加入loading组件" class="headerlink" title="５. 加入loading组件"></a>５. 加入loading组件</h5><blockquote>
+<p> 在scroll结尾复用loading 即可</p>
+</blockquote>
+<h4 id="开发song-list组件"><a href="#开发song-list组件" class="headerlink" title="开发song-list组件"></a><span id="jumpvuex">开发song-list组件</span></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;song-list&quot;&gt;</span><br><span class="line">    &lt;ul v-for=&quot;(song, index) in songs&quot; :key=&quot;index&quot; class=&quot;item&quot;&gt;</span><br><span class="line">      &lt;div class=&quot;content&quot;&gt;</span><br><span class="line">        &lt;h2 class=&quot;name&quot;&gt;&#123;&#123;song.name&#125;&#125;&lt;/h2&gt;</span><br><span class="line">        &lt;p class=&quot;desc&quot;&gt;&#123;&#123;getDesc(song)&#125;&#125;&lt;/p&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script type=&quot;text/ecmascript-6&quot;&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  props: &#123;</span><br><span class="line">    songs: &#123;</span><br><span class="line">      type: Array,</span><br><span class="line">      default: () =&gt; []</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getDesc(song) &#123;</span><br><span class="line">      return `$&#123;song.singer&#125; - $&#123;song.album&#125;`</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>在music-list中传入song值</p>
+<p><code>&lt;song-list :songs=&quot;songs&quot;&gt;&lt;/song-list&gt;</code></p>
+<h3 id="a-Vuex"><a href="#a-Vuex" class="headerlink" title="a. Vuex"></a><span id="jumpvuex">a. Vuex</span></h3><h4 id="什么是vuex"><a href="#什么是vuex" class="headerlink" title="什么是vuex"></a>什么是vuex</h4><blockquote>
+<p>Vuex 是一个专为 Vue.js 应用程序开发的<strong>状态管理模式</strong>。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。Vuex 也集成到 Vue 的官方调试工具 <a href="https://github.com/vuejs/vue-devtools" target="_blank" rel="noopener">devtools extension</a>，提供了诸如零配置的 time-travel 调试、状态快照导入导出等高级调试功能。</p>
+</blockquote>
+<p>简单的说，当我们的vue项目比较复杂的时候，有的时候两个兄弟组件，或者相关度联系很低的组件相互之间需要同时获取或监听同一个数据或状态，这个时候我们就要使用vuex</p>
+<blockquote>
+<p>vuex 就像是一个大的机房，里面存着共享数据。这个房间我们可以让任何一个组件进来获取数据或者更新数据</p>
+</blockquote>
+<p><img src="http://upload-images.jianshu.io/upload_images/11993435-700bb2cea1af7320.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<h4 id="如何使用vuex"><a href="#如何使用vuex" class="headerlink" title="如何使用vuex"></a>如何使用vuex</h4><p>安装vuex</p>
+<p><code>npm install vuex --save</code></p>
+<p>在项目的根目录下，我们一般会新建一个store文件夹，里面添加新建文件：</p>
+<ul>
+<li><p>入口文件 index.js  </p>
+</li>
+<li><p>存放状态 state.js</p>
+</li>
+<li><p>存放Mutations mutations.js</p>
+</li>
+<li><p>存放mutations相关数据的 mutation-types.js</p>
+</li>
+<li><p>数据修改 执行Mutations  actions.js</p>
+</li>
+<li><p>数据映射 getters.js</p>
+<blockquote>
+<p><code>getters</code> 和 vue 中的 <code>computed</code> 类似 , 都是用来计算 state 然后生成新的数据 ( 状态 ) 的。</p>
+</blockquote>
+</li>
+</ul>
+<p>以此项目为例子，需要各个组件之间共享一个singer数据</p>
+<p><strong>state.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> state = &#123;</span><br><span class="line">  singer: &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> state</span><br></pre></td></tr></table></figure>
+<p><strong>mutation-types.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_SINGER = <span class="string">'SET_SINGER'</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用常量替代 mutation 事件类型在各种 Flux 实现中是很常见的模式。这样可以使 linter 之类的工具发挥作用，同时把这些常量放在单独的文件中可以让你的代码合作者对整个 app 包含的 mutation 一目了然</p>
+</blockquote>
+<p><strong>mutations.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> types <span class="keyword">from</span> <span class="string">'./mutation-types'</span></span><br><span class="line"><span class="comment">// import * as obj from "xxx" 会将 "xxx" 中所有 export 导出的内容组合成一个对象返回。</span></span><br><span class="line"><span class="keyword">const</span> mutations = &#123;</span><br><span class="line">  [types.SET_SINGER](state, singer) &#123;</span><br><span class="line">    state.singer = singer</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> mutations</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>mutations.js 可以理解为是一个修改数据的方法的集合</p>
+</blockquote>
+<p><strong>getter.js</strong></p>
+<p>有时候我们需要从 store 中的 state 中派生出一些状态，如果有多个组件需要用到此属性，我们要么复制这个函数，或者抽取到一个共享函数然后在多处导入它——无论哪种方式都不是很理想。</p>
+<p>Vuex 允许我们在 store 中定义“getter”（可以认为是 store 的计算属性）。就像计算属性一样，getter 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> singer = <span class="function"><span class="params">state</span> =&gt;</span> state.singer</span><br></pre></td></tr></table></figure>
+<p><strong>index.js</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> actions <span class="keyword">from</span> <span class="string">'./actions'</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> getters <span class="keyword">from</span> <span class="string">'./getters'</span></span><br><span class="line"><span class="keyword">import</span> state <span class="keyword">from</span> <span class="string">'./state'</span></span><br><span class="line"><span class="keyword">import</span> mutations <span class="keyword">from</span> <span class="string">'./mutations'</span></span><br><span class="line"><span class="keyword">import</span> createLogger <span class="keyword">from</span> <span class="string">'vuex/dist/logger'</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex) <span class="comment">// 注册插件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> debug = process.env.NODE_ENV !== <span class="string">'production'</span> <span class="comment">// 线下调试的时候 debug 为 ture</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123; <span class="comment">// new一个实例</span></span><br><span class="line">  actions,</span><br><span class="line">  getters,</span><br><span class="line">  state,</span><br><span class="line">  mutations,</span><br><span class="line">  strict: debug, <span class="comment">// 开启严格模式，用于下面来控制是否开启插件</span></span><br><span class="line">  plugins: debug ? [createLogger()] : [] <span class="comment">// 开启插件</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>main.js</strong></p>
+<p>在vue的main.js 中 注册 vuex</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import store from &apos;./store&apos;</span><br><span class="line">....</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &apos;#app&apos;,</span><br><span class="line">  render: h =&gt; h(App),</span><br><span class="line">  router,</span><br><span class="line">  store</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>以上，vuex的初始化就完成了</p>
+<p><strong>singer.vue 写入 state</strong></p>
+<p>在组件中提交 Mutation</p>
+<p>你可以在组件中使用 <code>this.$store.commit(&#39;xxx&#39;)</code> 提交 mutation，或者使用 <code>mapMutations</code> 辅助函数将组件中的 methods 映射为 <code>store.commit</code> 调用（需要在根节点注入 <code>store</code>）。</p>
+<p><code>import {mapMutations} from &#39;vuex&#39;</code></p>
+<p>在methods结尾添加</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...mapMutations(&#123;</span><br><span class="line">	setSinger: <span class="string">'SET_SINGER'</span> <span class="comment">// 将 `this.setSinger()` 映射为 `this.$store.commit('SET_SINGER')`</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>通过<code>this.setSinger(singer)</code> 实现了对Mutations的提交</p>
+<p><strong>singer-detail.vue  取出state数据</strong></p>
+<p>引入</p>
+<p><code>import {mapGetters} from &#39;vuex&#39;</code></p>
+<p>在computed中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  ......</span><br><span class="line">  </span><br><span class="line">  ...mapGetters([</span><br><span class="line">    <span class="string">'singer'</span>  <span class="comment">// 把 `this.signer` 映射为 `this.$store.getters.singer`</span></span><br><span class="line">  ])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，singer-detail 和 singer 之间就实现 singer 的共享了</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>noobakong</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://noobakong.gitee.io/2018/08/25/vue-music-1/" title="vue-music项目笔记(1)">https://noobakong.gitee.io/2018/08/25/vue-music-1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag"><i class="fa fa-tag"></i> vue</a>
+          
+            <a href="/tags/project/" rel="tag"><i class="fa fa-tag"></i> project</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/12/vue-travel项目笔记/" rel="next" title="vue-travel项目笔记">
+                <i class="fa fa-chevron-left"></i> vue-travel项目笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/07/hexo同步，npm源的修改/" rel="prev" title="hexo同步，npm源的修改">
+                hexo同步，npm源的修改 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.png"
+                alt="noobakong" />
+            
+              <p class="site-author-name" itemprop="name">noobakong</p>
+              <p class="site-description motion-element" itemprop="description">代码和艺术,本应相通。</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/noobakong" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiao-jiao-se-i/" target="_blank" title="知乎"><i class="fa fa-fw fa-angellist"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-Music"><span class="nav-text">Vue-Music</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-前期工作"><span class="nav-text">一| 前期工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-项目初始化"><span class="nav-text">1.项目初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-装包"><span class="nav-text">2.装包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-顶部tab导航-amp-amp-Recommend-页面组件开发"><span class="nav-text">二| 顶部tab导航 &amp;&amp; Recommend 页面组件开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-顶部导航栏-tab"><span class="nav-text">1. 顶部导航栏 tab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-recommend组件"><span class="nav-text">2. recommend组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Jsonp"><span class="nav-text">Jsonp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jsonp-promise化"><span class="nav-text">jsonp promise化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Recommend的数据获取"><span class="nav-text">Recommend的数据获取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#轮播图组件"><span class="nav-text">轮播图组件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#歌单组件"><span class="nav-text">歌单组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#歌单组件数据获取"><span class="nav-text">歌单组件数据获取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vue-proxyTable代理-后端代理接口"><span class="nav-text">Vue proxyTable代理 后端代理接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表单组件开发"><span class="nav-text">表单组件开发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表单组件优化"><span class="nav-text">表单组件优化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-歌手组件开发"><span class="nav-text">三| 歌手组件开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-歌手首页开发"><span class="nav-text">1.歌手首页开发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据获取"><span class="nav-text">数据获取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据处理"><span class="nav-text">数据处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#listview-vue开发"><span class="nav-text">listview.vue开发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#shortcutList字母导航器"><span class="nav-text">shortcutList字母导航器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-歌手详情页"><span class="nav-text">2.歌手详情页</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字路由-二级路由设置"><span class="nav-text">字路由 / 二级路由设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加转场动画"><span class="nav-text">添加转场动画</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取singer-detail数据"><span class="nav-text">获取singer-detail数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#整理获取的数据结构"><span class="nav-text">整理获取的数据结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开发MusicList-vue组件"><span class="nav-text">开发MusicList.vue组件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-解决图片撑开问题"><span class="nav-text">1. 解决图片撑开问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-实现海报图跟着滚动的效果"><span class="nav-text">2. 实现海报图跟着滚动的效果</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-处理滚动到顶部的时候歌手title被歌单覆盖的问题"><span class="nav-text">3. 处理滚动到顶部的时候歌手title被歌单覆盖的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-下滑的时候bg-image图片放大"><span class="nav-text">4. 下滑的时候bg-image图片放大</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#５-加入loading组件"><span class="nav-text">５. 加入loading组件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开发song-list组件"><span class="nav-text">开发song-list组件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#a-Vuex"><span class="nav-text">a. Vuex</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是vuex"><span class="nav-text">什么是vuex</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何使用vuex"><span class="nav-text">如何使用vuex</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">noobakong</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">103k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:34</span>
+  
+</div>
+
+
+
+
+  <div class="powered-by">己不从心，身又岂能由己</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
