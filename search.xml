@@ -10,8 +10,8 @@
       </categories>
       <tags>
         <tag>node</tag>
-        <tag>project</tag>
         <tag>mongodb</tag>
+        <tag>project</tag>
       </tags>
   </entry>
   <entry>
@@ -55,6 +55,7 @@
     <content type="text"><![CDATA[学习node，实现一个简单的留言板小demo 原生node实现简易留言板 1. 使用模块 http模块 创建服务 fs模块 操作读取文件 url模块 便于path操作并读取表单提交数据 art-template模块（需npm安装） 服务端渲染 2. 服务端2.1 服务端代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667var http = require('http')var fs = require('fs')var url = require('url')var template = require('art-template')var comments = [ &#123; name:'阿孔', message: 'Yo~~', dataTime: '2018-09-27' &#125;, &#123; name: '老许', message: 'Yo~@@@~', dataTime: '2018-09-27' &#125;]http.createServer(function (req, res) &#123; var parseObj = url.parse(req.url, true) var pathname = parseObj.pathname if (pathname === '/') &#123; fs.readFile('./views/留言本.html', function (err, data) &#123; if (err) &#123; return res.end('404 Not Found') &#125; var htmlStr = template.render(data.toString(), &#123; comments: comments &#125;) res.end(htmlStr) &#125;) &#125; else if (pathname.indexOf('/public/') === 0) &#123; fs.readFile('.' + pathname, function (err, data) &#123; if (err) &#123; return res.end('404 Not Found') &#125; res.end(data) &#125;) &#125; else if (pathname === '/post') &#123; fs.readFile('./views/post.html', function (err, data) &#123; if (err) &#123; return res.end('404 Not Found') &#125; res.end(data) &#125;) &#125; else if (pathname === '/pinglun') &#123; // 追加到数组 var comment = parseObj.query comment.dataTime = '2018-10-01' comments.unshift(comment) // 跳转首页 // 如何通过服务器让客户端重定向 // 1. 状态码设置为 302 临时重定向 statusCode // 2. 在响应头中通过 location 告诉客户端去哪重定向 res.statusCode = 302 res.setHeader('Location', '/') res.end() &#125; else &#123; fs.readFile('./views/404.html', function(err, data) &#123; res.end(data) &#125;) &#125;&#125;).listen(3000, function () &#123; console.log('http://localhost:3000')&#125;) 2.2 页面渲染 使用了 第三方 的渲染模板工具 art-template,在请求 / 主页时，在服务端将页面中的数据渲染出来 数据来自comments数组 1234567891011if (pathname === '/') &#123; fs.readFile('./views/留言本.html', function (err, data) &#123; if (err) &#123; return res.end('404 Not Found') &#125; var htmlStr = template.render(data.toString(), &#123; comments: comments &#125;) res.end(htmlStr) &#125;)&#125; 2.3 评论提交 评论提交的实现，在post提交页面中 form表单的行为action指定 /pinglun，随后在服务端的app.js中处理 /pinglun路径请求逻辑 12345678910111213else if (pathname === '/pinglun') &#123; // 追加到数组 var comment = parseObj.query comment.dataTime = '2018-10-01' comments.unshift(comment) // 跳转首页 // 如何通过服务器让客户端重定向 // 1. 状态码设置为 302 临时重定向 statusCode // 2. 在响应头中通过 location 告诉客户端去哪重定向 res.statusCode = 302 res.setHeader('Location', '/') res.end() &#125; 其中，有几点需要注意 parseObj parseObj是通过url模块解析每次请求的路径得到的 var parseObj = url.parse(req.url, true) url中的parse方法可以将url解析为一段一段的数据 例如，我们在 node 中 执行下面代码 12345678910111213141516var parseObj = url.parse('http://localhost:3000/pinglun?name=aaa&amp;message=bbbbbbb', true)console.log(parseObj)Url &#123; protocol: 'http:', slashes: true, auth: null, host: 'localhost:3000', port: '3000', hostname: 'localhost', hash: null, search: '?name=aaa&amp;message=bbbbbbb', query: &#123; name: 'aaa', message: 'bbbbbbb' &#125;, pathname: '/pinglun', path: '/pinglun?name=aaa&amp;message=bbbbbbb', href: 'http://localhost:3000/pinglun?name=aaa&amp;message=bbbbbbb' &#125; 可以看到，url的方法直接将url解析成一个对象，里面包含着很多我们能方便使用的属性，入其中的query，这里面就包含着我们提交的数据信息，url.parse方法的第二个参数默认为 false ，若默认false的话，query就不是一个对象，而是一个字符串，设置为true后就会自动帮我们解析成一个对象，方便我们使用。 我们评论的追加就是取得这个parseObj.query对象中的数据 123var comment = parseObj.querycomment.dataTime = '2018-10-01'comments.unshift(comment) 最后在使用unshift数组方法追加到最前面，这样我们的评论功能就能实现了。 2.4 服务端重定向 我们在追加我们的评论后，需要跳转到我们的 / 主页，这是我们的 comments已经追加新数据， 在渲染的时候，自然就能将我们的新数据展现到我们的页面中。 关于重定向，此次有两部操作 12res.statusCode = 302res.setHeader('Location', '/') 第一步设置res请求的状态码，状态302 是临时重定向的状态码， 而后我们设置响应头的Location设置为 主页 访问别的页面：response.setStatus（302）; response.setHeader(“location”,”url”); 2.5 代码杂点笔记 模块加载在node中是同步的，通常把当前模块所有的依赖项都声明再文件模块最上面 为了让目录结构保持统一清晰，所以我们约定，把所有的 HTML 文件都放到 views（视图） 目录中，把所有的静态资源都存放在 public 目录中 ​ 浏览器收到 HTML 响应内容之后，就要开始从上到下依次解析， ​ 当在解析的过程中，如果发现： link script img iframe video audio ​ 等带有 src 或者 href（link） 属性标签（具有外链的资源）的时候，浏览器会自动对这些资源发起新的请求。 在这中服务端中，请求文件路径不要再去写相对路径了，因为这个时候所有的资源都是通过url来获取的，我们服务器开放了/public/目录，这里的静态资源的请求，如bootstrap.css都写为: &lt;link rel=&quot;stylesheet&quot; href=&quot;/public/lib/bootstrap/dist/css/bootstrap.css&quot;&gt; 浏览器在真正发请求的时候会最终把http://localhost:3000 拼在前面 3. 客户端3.1 客户端代码12345678910111213141516&lt;body&gt; &lt;div class="header container"&gt; &lt;div class="page-header"&gt; &lt;h1&gt;留言板 &lt;small&gt;--- a small demo of node&lt;/small&gt;&lt;/h1&gt; &lt;a class="btn btn-success" href="/post"&gt;发表留言&lt;/a&gt; &lt;hr&gt; &lt;/div&gt; &lt;/div&gt; &lt;div class="comments container"&gt; &lt;ul class="list-group"&gt; &#123;&#123;each comments&#125;&#125; &lt;li class="list-group-item"&gt;&#123;&#123;$value.name&#125;&#125;说: &#123;&#123;$value.message&#125;&#125;&lt;span class="float-right"&gt;&#123;&#123;$value.dataTime&#125;&#125;&lt;/span&gt;&lt;/li&gt; &#123;&#123;/each&#125;&#125; &lt;/ul&gt; &lt;/div&gt;&lt;/body&gt; 123456789101112131415161718192021222324252627282930313233343536373839404142&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;title&gt;Document&lt;/title&gt; &lt;link rel="stylesheet" href="/public/lib/bootstrap/dist/css/bootstrap.css"&gt;&lt;/head&gt;&lt;body&gt; &lt;div class="header container"&gt; &lt;div class="page-header"&gt; &lt;h1&gt;&lt;a href="/"&gt;首页&lt;/a&gt; &lt;small&gt;发表评论&lt;/small&gt;&lt;/h1&gt; &lt;/div&gt; &lt;/div&gt; &lt;div class="comments container"&gt; &lt;!-- 以前表单是如何提交的？ 表单中需要提交的表单控件元素必须具有 name 属性 表单提交分为： 1. 默认的提交行为 2. 表单异步提交 action 就是表单提交的地址，说白了就是请求的 url 地址 method 请求方法 get post --&gt; &lt;form action="/pinglun" method="get"&gt; &lt;div class="form-group"&gt; &lt;label for="input_name"&gt;你的大名&lt;/label&gt; &lt;input type="text" class="form-control" required minlength="2" maxlength="10" id="input_name" name="name" placeholder="请写入你的姓名"&gt; &lt;/div&gt; &lt;div class="form-group"&gt; &lt;label for="textarea_message"&gt;留言内容&lt;/label&gt; &lt;textarea class="form-control" name="message" id="textarea_message" cols="30" rows="10" required minlength="5" maxlength="20"&gt;&lt;/textarea&gt; &lt;/div&gt; &lt;button type="submit" class="btn btn-default"&gt;发表&lt;/button&gt; &lt;/form&gt; &lt;/div&gt;&lt;/body&gt;&lt;/html&gt; 所有的代码都在github仓库github代码]]></content>
       <categories>
         <category>Node</category>
+        <category>Project</category>
       </categories>
       <tags>
         <tag>node</tag>
@@ -137,8 +138,8 @@
         <category>Project</category>
       </categories>
       <tags>
-        <tag>vue</tag>
         <tag>project</tag>
+        <tag>vue</tag>
       </tags>
   </entry>
   <entry>
@@ -150,8 +151,8 @@
         <category>Project</category>
       </categories>
       <tags>
-        <tag>vue</tag>
         <tag>project</tag>
+        <tag>vue</tag>
       </tags>
   </entry>
   <entry>
