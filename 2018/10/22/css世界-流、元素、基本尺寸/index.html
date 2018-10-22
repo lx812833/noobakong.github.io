@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="最近在读张鑫旭大神的CSS世界一书，收货很多，记录下的读书笔记。">
+<meta name="keywords" content="css世界">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css世界--流、元素、基本尺寸">
+<meta property="og:url" content="https://noobakong.gitee.io/2018/10/22/css世界-流、元素、基本尺寸/index.html">
+<meta property="og:site_name" content="noobakong">
+<meta property="og:description" content="最近在读张鑫旭大神的CSS世界一书，收货很多，记录下的读书笔记。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.runoob.com/images/box-model.gif">
+<meta property="og:updated_time" content="2018-10-22T05:11:57.888Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="css世界--流、元素、基本尺寸">
+<meta name="twitter:description" content="最近在读张鑫旭大神的CSS世界一书，收货很多，记录下的读书笔记。">
+<meta name="twitter:image" content="http://www.runoob.com/images/box-model.gif">
+
+
+
+
+
+
+  <link rel="canonical" href="https://noobakong.gitee.io/2018/10/22/css世界-流、元素、基本尺寸/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>css世界--流、元素、基本尺寸 | noobakong</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">noobakong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">我爱一个姓许的女孩~</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://noobakong.gitee.io/2018/10/22/css世界-流、元素、基本尺寸/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="noobakong">
+      <meta itemprop="description" content="代码和艺术,本应相通。">
+      <meta itemprop="image" content="/images/touxiang.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="noobakong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">css世界--流、元素、基本尺寸<a href="https://github.com/theme-next/theme-next.org/_posts/tree/master/css世界-流、元素、基本尺寸.md" class="post-edit-link" title="编辑" target="_blank">
+                    <i class="fa fa-pencil"></i>
+                  </a>
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-10-22 13:09:26" itemprop="dateCreated datePublished" datetime="2018-10-22T13:09:26+08:00">2018-10-22</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">9.3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>最近在读张鑫旭大神的CSS世界一书，收货很多，记录下的读书笔记。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="流-元素-基本尺寸"><a href="#流-元素-基本尺寸" class="headerlink" title="流 元素 基本尺寸"></a>流 元素 基本尺寸</h1><blockquote>
+<p>流之所以影响整个css世界，是因为它影响了css世界的基石 –HTML</p>
+</blockquote>
+<p>HTML 常见的标签有div、 p、 li和table以及span、 img、 strong和em等。虽然标签种类繁多，但通常我们就把它们分为两类： 块级元素（block-level element）和内联元素（inline element）。 </p>
+<h2 id="1-块级元素"><a href="#1-块级元素" class="headerlink" title="1.块级元素"></a>1.块级元素</h2><h3 id="1-1-概念相关"><a href="#1-1-概念相关" class="headerlink" title="1.1 概念相关"></a>1.1 概念相关</h3><p>“块级元素”对应的英文是 block-level element，常见的块级元素有 <code>div</code>,<code>li</code>,<code>table</code>等。</p>
+<p><strong>块级元素和 <code>display：block</code> 不是一个概念</strong></p>
+<p>例如块级元素 li 和 table ，他们的 display 的值分别为 list-item 和 table</p>
+<p>块级元素具有换行性质，也就是一个<strong>水平流</strong>上只能单独显示一个元素，多个块级元素则换行显示；</p>
+<p><strong>由于这种 换行性质，理论上块级元素都可以配合 clear 属性来清除浮动带来的影响</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clear</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line"> <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line"> display: table; // 也可以是 block，或者是 list-item</span><br><span class="line"> <span class="selector-tag">clear</span>: <span class="selector-tag">both</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实际开发中，display的值要么是block，要么是table，并不会使用list-item</p>
+<h3 id="1-2-为什么-list-item会出现项目符号"><a href="#1-2-为什么-list-item会出现项目符号" class="headerlink" title="1.2 为什么 list-item会出现项目符号"></a>1.2 为什么 list-item会出现项目符号</h3><blockquote>
+<p>所有的块级元素都有一个主盒子，而list-item除了主盒子，还有一个附加盒子</p>
+</blockquote>
+<p>list-item 之所以会出现项目符号(小黑点)，是因为生成了一个附加盒子，学名为 “标记盒子”，专门来存放圆点，数字这些项目符号</p>
+<p>IE不支持display：list-item 的原因可能就是因为IE无法创建 这个标记盒子的原因。</p>
+<h3 id="1-3-display-inline-block"><a href="#1-3-display-inline-block" class="headerlink" title="1.3 display:inline-block"></a>1.3 display:inline-block</h3><p><code>display:inline-block</code> 我们可以把一个这样的元素分为两个部分组成，外在的inline内联盒子，里面的block块级盒子组成。这样，由于外在的外联盒子，它的呈现方式既可以和文字等元素同为一行，又因为内在的块级盒子，它可以设置元素的宽高。</p>
+<p>于是，按照display的属性值不同</p>
+<table>
+<thead>
+<tr>
+<th>display</th>
+<th>外盒子</th>
+<th>内盒子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>block</td>
+<td>block</td>
+<td>block</td>
+</tr>
+<tr>
+<td>inline</td>
+<td>inline</td>
+<td>inline</td>
+</tr>
+<tr>
+<td>inline-block</td>
+<td>inline</td>
+<td>block</td>
+</tr>
+<tr>
+<td>table</td>
+<td>block</td>
+<td>table</td>
+</tr>
+<tr>
+<td>inline-table</td>
+<td>inline</td>
+<td>table</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>外盒子影响着流的走向，内盒子控制元素的基本属性</p>
+</blockquote>
+<h2 id="2-width-height-作用的具体细节"><a href="#2-width-height-作用的具体细节" class="headerlink" title="2. width/height 作用的具体细节"></a>2. width/height 作用的具体细节</h2><blockquote>
+<p>我们在上面已经说过， width/height等属性作用在内盒子中，也就是容器盒子中。接下来我们说一下具体的作用细节。</p>
+</blockquote>
+<p>流特性体现在水平方向上，我们来讨论width</p>
+<h3 id="2-1-width-auto"><a href="#2-1-width-auto" class="headerlink" title="2.1 width:auto"></a>2.1 width:auto</h3><blockquote>
+<p>width的默认值就是auto</p>
+</blockquote>
+<ul>
+<li><p>充分利用空间 – div的默认宽度一般都是100%</p>
+</li>
+<li><p>收缩和包裹</p>
+</li>
+<li><p>收缩到最小 – min-content</p>
+<p>当每一列空间都不够的时候，文字能断就断，但中文是随便断的，英文单词不能断。</p>
+</li>
+<li><p>超出容器限制</p>
+<p>没有相关设置的情况下，一般元素不会主动超过父级宽度容器，除非一些特殊情况</p>
+<p>例如：内容而很长的连续英文和数字</p>
+<p>​        或者内联元素被设置了 white-space:nowrap 属性</p>
+</li>
+</ul>
+<p>在 CSS 世界中，盒子分“内在盒子”和“外在盒子”，显示也分“内部显示”和“外部显示”，同样地，尺寸也分“内部尺寸”和“外部尺寸”。</p>
+<p>上述的width：auto 的四条特性里面，是默认宽度 100%显示，是“外部尺寸”，其余全部是“内部尺寸”。而这唯一的<strong>“外部尺寸”，是“流”的精髓所在。</strong></p>
+<h3 id="2-2-外部尺寸与流体特性"><a href="#2-2-外部尺寸与流体特性" class="headerlink" title="2.2 外部尺寸与流体特性"></a>2.2 外部尺寸与流体特性</h3><ol>
+<li><p><strong>正常流宽度。</strong></p>
+<p>当我们在一个容器里倒入足量的水时，水一定会均匀铺满整个容器。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">a</span> &#123;</span><br><span class="line"> <span class="attribute">display</span>: block;</span><br><span class="line"> <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>默认为inline的a元素display设置为block，本身就是表示宽度铺满整个父级，后面的100%宽度就不用再加了。</p>
+<p>作者总结过一套<strong>三无准则</strong>: 无宽度，无图片，无浮动。</p>
+<p>其中无宽度的原因就是因为一旦外部尺寸的块级元素设置了宽度，其流动性就丢失了。</p>
+</li>
+<li><p><strong>格式化宽度</strong></p>
+<p>格式化宽度仅出现在“绝对定位模型”中，也就是出现在 position属性值为 absolute 或 fixed 的元素中。在默认情况下，绝对定位元素的宽度表现是“包裹性”，宽度由内部尺寸决定</p>
+<p>但是有一种情况其宽度是由外部尺寸所决定的，例如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123; <span class="attribute">position</span>: absolute; <span class="attribute">left</span>: <span class="number">20px</span>; <span class="attribute">right</span>: <span class="number">20px</span>; &#125;</span><br></pre></td></tr></table></figure>
+<p>假设该元素最近的具有定位特性的祖先元素的宽度是 1000 像素，则这个元素的宽度是 960（即 1000−20−20）像素。</p>
+</li>
+</ol>
+<h3 id="2-3-内部尺寸与流体特性"><a href="#2-3-内部尺寸与流体特性" class="headerlink" title="2.3 内部尺寸与流体特性"></a>2.3 内部尺寸与流体特性</h3><blockquote>
+<p>所谓“内部尺寸”，简单来讲就是元素的尺寸由内部的元素决定，而非由外部的容器决定。</p>
+</blockquote>
+<p>如何判断一个元素是否为内部尺寸呢？</p>
+<p>​    假如这个元素里面没有内容，宽度就是 0，那就是应用的“内部尺寸”。</p>
+<p>“内部尺寸”有下面 3 种表现形式：</p>
+<ol>
+<li><p><strong>包裹性。</strong></p>
+<p>“包裹性”，除了“包裹”，还有“自适应性”。“自适应性”是区分后面两种尺寸表现很重要的一点。自适应，指的是元素尺寸由内部元素决定。</p>
+<p>按钮就是 CSS 世界中极具代表性的 inline-block 元素，可谓展示“包裹性”最好的例子，具体表现为：按钮文字越多宽度越宽（内部尺寸特性），但如果文字足够多，则会在容器的宽度处自动换行（自适应特性）。</p>
+<p><strong>“包裹性”对实际开发的作用</strong></p>
+<blockquote>
+<p>请看这个需求：页面某个模块的文字内容是动态的，可能是几个字，也可能是一句话。然<br>后，希望文字少的时候居中显示，文字超过一行的时候居左显示。该如何实现？</p>
+</blockquote>
+<p><a href="https://demo.cssworld.cn/3/2-5.php" target="_blank" rel="noopener">官方演示代码连接</a></p>
+</li>
+<li><p><strong>首选最小宽度</strong></p>
+<blockquote>
+<p> 在 CSS 世界中，图片和文字的权重要远大于布局，因此，CSS 的设计者显然是不会让图文在 width:auto 时宽度变成 0 的，此时所表现的宽度就是“首选最小宽度”。</p>
+</blockquote>
+<ul>
+<li><p>汉字最小宽度是每个字的宽度</p>
+</li>
+<li><p>英文最小宽度是由连续的英文字符单元决定，终止于空格，短横线及其他非字母符号</p>
+<p><em>想让英文字符和中文一样一个字符为最小宽度，可以使用css中的 word-break:break-all 属性</em></p>
+</li>
+<li><p>类似图片这样的替换元素的最小宽度就是该元素内容本身的宽度</p>
+</li>
+</ul>
+</li>
+<li><p><strong>最大宽度</strong></p>
+<blockquote>
+<p>最大宽度就是元素可以有的最大宽度。</p>
+</blockquote>
+<p>如果内部没有块级元素或者块级元素没有设定宽度值，则“最大宽度”实际上是最大的连续内联盒子的宽度。</p>
+</li>
+</ol>
+<h3 id="2-4-width-值作用的细节"><a href="#2-4-width-值作用的细节" class="headerlink" title="2.4 width 值作用的细节"></a>2.4 width 值作用的细节</h3><blockquote>
+<p>对于一个元素，我们设定其宽度为 100px，如下：div { width: 100px; }<br>请问，100px 的宽度是如何作用到这个元素上的？</p>
+</blockquote>
+<p>width 是作用在“内在盒子”上的,实际上，这个内在盒子是由很多部分组成 — <strong>盒子模型</strong></p>
+<p><img src="http://www.runoob.com/images/box-model.gif" alt="盒子模型"></p>
+<p>我们的这个“内在盒子”又被分成了 4 个盒子，分别是 content box、padding box、border box和 margin box</p>
+<p>“margin 的背景永远是透明的”，因此不可能作为 backgound-clip 或 backgroundorigin属性值出现。margin 一旦设定具体宽度和高度值，其本身的尺寸是不会因 margin值变化而变化的。</p>
+<p><strong>width宽度作用在content盒子上</strong></p>
+<p>假设一个盒子的css如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123; <span class="attribute">width</span>: <span class="number">100px</span>; <span class="attribute">padding</span>: <span class="number">20px</span>; <span class="attribute">border</span>: <span class="number">20px</span> solid; &#125;</span><br></pre></td></tr></table></figure>
+<p>那么它的宽度就变成了 100 + 20x2 + 20x2 = 180 px 了</p>
+<p>合情合理，但是这种机制会导致以下问题：</p>
+<ol>
+<li>流动性丢失</li>
+<li>与现实世界表现不一致的困扰</li>
+</ol>
+<p>有没有什么办法能避免这种盒子计算而导致的错位问题呢，方法之一就是采用书写方式约束，使用“宽度分离原则”</p>
+<h3 id="2-4-CSS流体布局下的宽度分原则"><a href="#2-4-CSS流体布局下的宽度分原则" class="headerlink" title="2.4 CSS流体布局下的宽度分原则"></a>2.4 CSS流体布局下的宽度分原则</h3><blockquote>
+<p>所谓“宽度分离原则”，就是 CSS 中的 width 属性不与影响宽度的 padding/border（有时候包括 margin）属性共存</p>
+</blockquote>
+<p><strong>如何实现？</strong></p>
+<p>分离，width 独立占用一层标签，而padding、border、margin 利用流动性在内部自适应呈现。</p>
+<p>例子：</p>
+<p>这里有一个div盒子</p>
+<ul>
+<li><p>常规布局</p>
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line"> <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line"> <span class="attribute">border</span>: <span class="number">1px</span> solid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  此时宽度为102像素，我们现在希望元素内边框有20像素的留白，我们一般会想到的解决办法是加padding的值</p>
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line"> <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line"> <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line"> <span class="attribute">border</span>: <span class="number">1px</span> solid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  ok 此时有了留白，但是我们发现宽度变成了 102 + 40 = 142px, 我们常规的会使用减少宽度来实现我们的要求</p>
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line"> width: 60px; // 通过计算，减去 40 像素</span><br><span class="line"> <span class="selector-tag">padding</span>: 20<span class="selector-tag">px</span>;</span><br><span class="line"> <span class="selector-tag">border</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  要求实现了，但是如果我们是通过计算，才能达到我们想要的，以后的调试会有更多的麻烦。</p>
+</li>
+<li><p>宽度分离</p>
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.father</span> &#123;</span><br><span class="line"> <span class="attribute">width</span>: <span class="number">102px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.son</span> &#123;</span><br><span class="line"> <span class="attribute">border</span>: <span class="number">1px</span> solid;</span><br><span class="line"> <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  嵌套一层标签，父元素定宽，子元素因为 width 使用的是默认值 auto，所以会如水流般自动填满父级容器。</p>
+</li>
+</ul>
+<pre><code>宽度还是 102 像素，子元素的 content box 自动变成了 60 像素，和上面反例的表现一样。
+
+也就是说，使用“宽度分离”后，咱们不需要烧脑子去计算了，而且页面结构反而更稳固。
+
+这个做法的唯一缺点就是要多嵌套一层html标签，和对开发者极高的css要求水平。
+
+&gt; 针对这中情况，有没有即无需计算，又不用额外的套用标签而实现呢？ ----&gt; box-sizing
+</code></pre><h3 id="2-5-改变width-height-作用细节的-box-sizing"><a href="#2-5-改变width-height-作用细节的-box-sizing" class="headerlink" title="2.5 改变width/height 作用细节的 box-sizing"></a>2.5 改变width/height 作用细节的 box-sizing</h3><p>box-sizing 被直译为“盒尺寸”，实际上，其更准确的叫法应该是“盒尺寸的作用细节”，或者说得更通俗一点，叫“width 作用的细节”，也就是说，<strong>box-sizing 属性的作用是改变 width 的作用细节</strong>。</p>
+<p>正常情况下width作用在盒模型中的四个盒子中的content盒子上，box-sizing的作用就是可以把width作用的盒子变成其他的几个盒子上，有以下几种写法</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box1</span> &#123; <span class="attribute">box-sizing</span>: content-box; &#125; <span class="comment">/* 默认值 */</span></span><br><span class="line"><span class="selector-class">.box2</span> &#123; <span class="attribute">box-sizing</span>: padding-box; &#125; <span class="comment">/* Firefox 曾经支持 */</span></span><br><span class="line"><span class="selector-class">.box3</span> &#123; <span class="attribute">box-sizing</span>: border-box; &#125; <span class="comment">/* 全线支持 */</span></span><br><span class="line"><span class="selector-class">.box4</span> &#123; <span class="attribute">box-sizing</span>: margin-box; &#125; <span class="comment">/* 从未支持过 */</span></span><br></pre></td></tr></table></figure>
+<p>拿 <code>.box3 { box-sizing: border-box; }</code>来说，就是把原来的宽度作用对象从content-box转到了border-box</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line"> <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line"> <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;   </span><br><span class="line">此时这个盒子的宽度是100<span class="selector-tag">px</span></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line"> <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line"> <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line"> <span class="attribute">border</span>: <span class="number">1px</span> solid;</span><br><span class="line">&#125; </span><br><span class="line">这事的宽度还是100<span class="selector-tag">px</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-6-height-auto-和-height-100"><a href="#2-6-height-auto-和-height-100" class="headerlink" title="2.6 height: auto 和 height: 100%"></a>2.6 height: auto 和 height: 100%</h3><blockquote>
+<p>宽度稀缺，高度无限，所以在css中高度较宽度更简单纯洁</p>
+</blockquote>
+<p><strong>height: auto</strong></p>
+<p>所有的元素盒子在页面中表现的每个有多高，加在一起，就是最终的高度值</p>
+<p><strong>height: 100%</strong></p>
+<p>height 和 width 还有一个比较明显的区别就是对百分比单位的支持。对于 width 属性，就算父元素 width 为 auto，其百分比值也是支持的，但是对于 height 属性，如果父元素height 为 auto，只要子元素在文档流中，其百分比值完全就被忽略了。</p>
+<blockquote>
+<p>对于普通文档流中的元素，百分比高度值要想起作用，其父级必须有一个可以生效的高度值。</p>
+</blockquote>
+<p><strong>为何父级没有具体高度值的时候，height:100%会无效？</strong></p>
+<p>如果包含块的高度没有显式指定（即高度由内容决定），并且该元素不是绝对定位，则计算值为auto。一句话总结就是：因为解释成了 auto。要知道，auto 和百分比计算，肯定是算<br>不了的。</p>
+<p><strong>如何让元素支持 height:100%效果</strong></p>
+<ol>
+<li><p>设定显式的高度值。这个没什么好说的，例如，设置 height:600px，或者可以生效的百分比值高度。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span>, <span class="selector-tag">body</span> &#123;</span><br><span class="line"> <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用绝对定位。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line"> <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line"> <span class="attribute">position</span>: absolute;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时的 height:100%就会有计算值，即使祖先元素的 height 计算为 auto 也是如此。</p>
+<p>绝对定位元素的百分比计算和非绝对定位元素的百分比计算是有区别的:</p>
+<p>绝对定位的宽高百分比计算是相对于 padding box 的</p>
+<p>非绝对定位元素则是相对于 content box 计算的</p>
+</li>
+</ol>
+<h2 id="3-min-width-max-width和min-height-max-height"><a href="#3-min-width-max-width和min-height-max-height" class="headerlink" title="3. min-width/max-width和min-height/max-height"></a>3. min-width/max-width和min-height/max-height</h2><h3 id="3-1为流体而生的-min-width-max-width"><a href="#3-1为流体而生的-min-width-max-width" class="headerlink" title="3.1为流体而生的 min-width/max-width"></a>3.1为流体而生的 min-width/max-width</h3><blockquote>
+<p>网页宽度在 1200～1400 像素自适应，既满足大屏的大气，又满足笔记本的良好显示</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line"> <span class="attribute">min-width</span>: <span class="number">1200px</span>;</span><br><span class="line"> <span class="attribute">max-width</span>: <span class="number">1400px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>无须 width 设置，直接使用 min-width/max-width</p>
+<p>再比如一个图片的盒子宽度已定：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">img</span> &#123;</span><br><span class="line"> <span class="attribute">max-width</span>: <span class="number">100%</span>;</span><br><span class="line"> <span class="attribute">height</span>: auto<span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>height:auto 是必需的，否则，如果原始图片有设定 height，max-width 生效的时候，图片就会被水平压缩。强制 height 为 auto 可以确保宽度不超出的同时使图片保持原来的比例。但这样也会有体验上的问题，那就是在加载时图片占据高度会从 0 变成计算高度，图文会有明显的瀑布式下落。</p>
+<h3 id="3-2-与众不同的初始值"><a href="#3-2-与众不同的初始值" class="headerlink" title="3.2 与众不同的初始值"></a>3.2 与众不同的初始值</h3><blockquote>
+<p>width/height 的默认值是 auto，而 min-width/max-width 和 min-heigh/max-height 的初始值则要复杂些</p>
+</blockquote>
+<p>max-width 和 max-height 的初始值是 none</p>
+<p>min-width 和 min-height 的初始值是 auto</p>
+<h3 id="3-3-超越-important，超越最大"><a href="#3-3-超越-important，超越最大" class="headerlink" title="3.3 超越!important，超越最大"></a>3.3 超越!important，超越最大</h3><p>超越!important</p>
+<blockquote>
+<p>min-width/max-width 和 min-height/max-height 属性间，以及与width 和 height 之间有一套相互覆盖的规则。这套规则用一句比较通俗的话概括就是:超越!important，超越最大。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"1.jpg"</span> <span class="attr">style</span>=<span class="string">"width:480px!important;"</span>&gt;</span></span><br><span class="line">img &#123; max-width: 256px; &#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码作用后，img的宽度为 max-width的宽度 – 256px，style、!important 通通靠边站！因为 max-width 会覆盖 width。</p>
+<p>超越最大</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line"> <span class="attribute">min-width</span>: <span class="number">1400px</span>;</span><br><span class="line"> <span class="attribute">max-width</span>: <span class="number">1200px</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>最小宽度居然比最大宽度设置得还大, 最后谁会生效？</p>
+<p>遵循“超越最大”规则（注意不是“后来居上”规则），min-width 活下来，max-width 被忽略，于是，.container 元素表现为至少 1400 像素宽</p>
+<h3 id="3-4-任意高度元素的展开收起动画技术"><a href="#3-4-任意高度元素的展开收起动画技术" class="headerlink" title="3.4 任意高度元素的展开收起动画技术"></a>3.4 任意高度元素的展开收起动画技术</h3><blockquote>
+<p>“展开收起”效果是网页中比较常见的一种交互形式，通常的做法是控制 display 属性值在 none 和其他值之间切换</p>
+</blockquote>
+<p>传统实现可以使用 jQuery 的 slideUp()/slideDown()方法</p>
+<p>第一反应就是使用 height + overflow:hidden 实现。但是，很多时候，我们展开的元素内容是动态的，换句话说高度是不固定的，因此，height 使用的值是默认的 auto</p>
+<p>因此，下面代码呈现的效果也是生硬地展开和收起：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.element</span> &#123;</span><br><span class="line"> <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line"> <span class="attribute">overflow</span>: hidden;</span><br><span class="line"> <span class="attribute">transition</span>: height .<span class="number">25s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.element</span><span class="selector-class">.active</span> &#123;</span><br><span class="line"> <span class="attribute">height</span>: auto; <span class="comment">/* 没有 transition 效果，只是生硬地展开 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>auto 是个关键字值，并非数值，正如 height:100%的 100%无法和 auto 相计算一样，从 0px 到 auto 也是无法计算的，因此无法形成过渡或动画效果。</p>
+<p><strong>我们可以使用max-height来解决这一问题</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.element</span> &#123;</span><br><span class="line"> <span class="attribute">max-height</span>: <span class="number">0</span>;</span><br><span class="line"> <span class="attribute">overflow</span>: hidden;</span><br><span class="line"> <span class="attribute">transition</span>: max-height .<span class="number">25s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.element</span><span class="selector-class">.active</span> &#123;</span><br><span class="line"> <span class="attribute">max-height</span>: <span class="number">666px</span>; <span class="comment">/* 一个足够大的最大高度值 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>展开后我的高度只要比max-height小，那么元素的高度就是height的计算高度，一个高度不定的任意元素的展开动画效果就能实现了。</p>
+<p><a href="https://demo.cssworld.cn/3/3-2.php" target="_blank" rel="noopener">css世界官方demo</a></p>
+<p><strong>注意： max-height值在保证比height大的情况下尽可能和的小</strong></p>
+<p>因为max-height可能会影响动画的时间， 比方说，我们展开的元素高度是 100 像素，而 max-height 是 1000 像素，假如一个动画1000ms，则前 900 ms 我们是看不到收起效果的，因为max-height 从 1000 像素到 100 像素变化这段时间，元素不会有区域被隐藏，会给人动画延迟 900 ms 的感觉</p>
+<h2 id="4-内联元素"><a href="#4-内联元素" class="headerlink" title="4. 内联元素"></a>4. 内联元素</h2><h3 id="4-1-哪些是内联元素"><a href="#4-1-哪些是内联元素" class="headerlink" title="4.1 哪些是内联元素"></a>4.1 哪些是内联元素</h3><p><strong>从定义：</strong></p>
+<p>内联元素的内联指的是外在盒子，外在盒子表现为inline的元素都是内联元素。</p>
+<blockquote>
+<p>inline-block 和 inline-table 都是“内联元素”，因为它们的<br>“外在盒子”都是内联盒子。自然 display:inline 的元素也是“内联元素”，那么，<br>按钮元素是内联元素，因为其 display 默认值是 inline-block；img图片元素也是内联<br>元素，因为其 display 默认值是 inline 等。</p>
+</blockquote>
+<p><strong>从表现看:</strong></p>
+<blockquote>
+<p>就行为表现来看，“内联元素”的典型特征就是可以和文字在一行显示。</p>
+</blockquote>
+<p>浮动元素貌似也是可以和文字在一个水平上显示的,但是浮动已经脱离文档流，不属于内联元素。</p>
+<h3 id="4-2-内联世界深入的基础—内联盒模型-import"><a href="#4-2-内联世界深入的基础—内联盒模型-import" class="headerlink" title="4.2 内联世界深入的基础—内联盒模型 (import)"></a>4.2 内联世界深入的基础—内联盒模型 (import)</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>这是一行普通的文字，这里有个 <span class="tag">&lt;<span class="name">em</span>&gt;</span>em<span class="tag">&lt;/<span class="name">em</span>&gt;</span> 标签。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>看似普通，实际上包含了很多术语和概念，或者换种通俗的说法，包含了很多种盒子。</p>
+<ol>
+<li><p>内容区域</p>
+<p>内容区域指一种围绕文字看不见的盒子，其大小仅受字符本身特性控制，本质上是一个字符盒子（character box）；但是有些元素，如图片这样的替换元素，其内容显然不是文字，不存在字符盒子之类的，因此，对于这些元素，内容区域可以看成元素自身。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是一行普通的文字，这里有个 <span class="tag">&lt;<span class="name">em</span>&gt;</span>em<span class="tag">&lt;/<span class="name">em</span>&gt;</span> 标签。</span><br></pre></td></tr></table></figure>
+<p>以上代码表现的区域，可以理解为内容区域。</p>
+</li>
+<li><p>内联盒子</p>
+<p>如果外部含内联标签等），则属于“内联盒子”；如果是个光秃秃的文字，则属于“匿名内联盒子”</p>
+</li>
+<li><p>行框盒子（line box）</p>
+<p>每一行就是一个“行框盒子”（实线框标注），每个“行框盒子”又是由一个一个“内联盒子”<br>组成的。</p>
+</li>
+<li><p>包含盒子/包含块（containing box）</p>
+<p><code>&lt;p&gt;</code>标签就是一个“包含盒子”（实线框标注），此盒子由一行一行的“行框盒子”组成。</p>
+</li>
+</ol>
+<h3 id="4-3-幽灵空白节点"><a href="#4-3-幽灵空白节点" class="headerlink" title="4.3 幽灵空白节点"></a>4.3 幽灵空白节点</h3><blockquote>
+<p>在 HTML5 文档声明中，内联元素的所有解析和渲染表现就如同每个行框盒子的前面有一个“空白节点”一样。这个“空白节点”永远透明，不占据任何宽度，看不见也无法通过脚本获取，就好像幽灵一样，但又确确实实地存在，表现如同文本节点一样，因此，我称之为“幽灵空白节点”</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">  div &#123;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">background-color</span>: <span class="selector-id">#cd0000</span>;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined">  span &#123;</span></span><br><span class="line"><span class="undefined">    display: inline-block;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>浏览器打开上述代码，发现div的高度不是0，原因就在于幽灵空白节点。</p>
+<p>“幽灵空白节点”实际上也是一个盒子，不过是个假想盒，名叫“strut”，中文直译为“支柱”，是一个存在于每个“行框盒子”前面，同时具有该元素的字体和行高属性的 0 宽度的内联盒。</p>
+<blockquote>
+<p>Each line box starts with a zero-width inline box with the element’s font and line<br>height properties. We call that imaginary box a “strut”. </p>
+</blockquote>
+<p><em>内容总结与 <a href="https://www.zhangxinxu.com/" target="_blank" rel="noopener">张鑫旭</a>大神 – 《css世界》</em></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>noobakong</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://noobakong.gitee.io/2018/10/22/css世界-流、元素、基本尺寸/" title="css世界--流、元素、基本尺寸">https://noobakong.gitee.io/2018/10/22/css世界-流、元素、基本尺寸/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css世界/" rel="tag"><i class="fa fa-tag"></i> css世界</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/18/node-blog项目简记/" rel="next" title="node-blog项目简记">
+                <i class="fa fa-chevron-left"></i> node-blog项目简记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.png"
+                alt="noobakong" />
+            
+              <p class="site-author-name" itemprop="name">noobakong</p>
+              <p class="site-description motion-element" itemprop="description">代码和艺术,本应相通。</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/noobakong" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/xiao-jiao-se-i/" target="_blank" title="知乎"><i class="fa fa-fw fa-angellist"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#流-元素-基本尺寸"><span class="nav-text">流 元素 基本尺寸</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-块级元素"><span class="nav-text">1.块级元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-概念相关"><span class="nav-text">1.1 概念相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-为什么-list-item会出现项目符号"><span class="nav-text">1.2 为什么 list-item会出现项目符号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-display-inline-block"><span class="nav-text">1.3 display:inline-block</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-width-height-作用的具体细节"><span class="nav-text">2. width/height 作用的具体细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-width-auto"><span class="nav-text">2.1 width:auto</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-外部尺寸与流体特性"><span class="nav-text">2.2 外部尺寸与流体特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-内部尺寸与流体特性"><span class="nav-text">2.3 内部尺寸与流体特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-width-值作用的细节"><span class="nav-text">2.4 width 值作用的细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-CSS流体布局下的宽度分原则"><span class="nav-text">2.4 CSS流体布局下的宽度分原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-改变width-height-作用细节的-box-sizing"><span class="nav-text">2.5 改变width/height 作用细节的 box-sizing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-height-auto-和-height-100"><span class="nav-text">2.6 height: auto 和 height: 100%</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-min-width-max-width和min-height-max-height"><span class="nav-text">3. min-width/max-width和min-height/max-height</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1为流体而生的-min-width-max-width"><span class="nav-text">3.1为流体而生的 min-width/max-width</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-与众不同的初始值"><span class="nav-text">3.2 与众不同的初始值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-超越-important，超越最大"><span class="nav-text">3.3 超越!important，超越最大</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-任意高度元素的展开收起动画技术"><span class="nav-text">3.4 任意高度元素的展开收起动画技术</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-内联元素"><span class="nav-text">4. 内联元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-哪些是内联元素"><span class="nav-text">4.1 哪些是内联元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-内联世界深入的基础—内联盒模型-import"><span class="nav-text">4.2 内联世界深入的基础—内联盒模型 (import)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-幽灵空白节点"><span class="nav-text">4.3 幽灵空白节点</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">noobakong</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">142k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:09</span>
+  
+</div>
+
+
+
+
+  <div class="powered-by">己不从心，身又岂能由己</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
