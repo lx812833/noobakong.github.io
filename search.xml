@@ -20,9 +20,9 @@
         <category>Project</category>
       </categories>
       <tags>
+        <tag>node</tag>
         <tag>mongodb</tag>
         <tag>project</tag>
-        <tag>node</tag>
       </tags>
   </entry>
   <entry>
@@ -33,8 +33,8 @@
         <category>Node</category>
       </categories>
       <tags>
-        <tag>mongodb</tag>
         <tag>node</tag>
+        <tag>mongodb</tag>
       </tags>
   </entry>
   <entry>
